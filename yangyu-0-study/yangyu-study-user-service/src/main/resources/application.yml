@@ -1,0 +1,27 @@
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: yangyu-study-user-service
+  datasource:
+        url: jdbc:mysql://localhost:3306/test
+        driver-class-name: com.mysql.jdbc.Driver
+        username: root
+        password: root
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      percentage: 1.0
+server:
+  port: 8762
+security:
+  basic:
+    enabled: false

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: yangyu-study-zipkin-server
+server:
+  port: 9411
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+security:
+  basic:
+    enabled: false
