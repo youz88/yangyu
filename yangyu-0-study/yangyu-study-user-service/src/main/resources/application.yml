@@ -7,10 +7,11 @@ spring:
   application:
     name: yangyu-study-user-service
   datasource:
-        url: jdbc:mysql://localhost:3306/test
-        driver-class-name: com.mysql.jdbc.Driver
-        username: root
-        password: root
+    url: jdbc:mysql://localhost:3306/test
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    data: classpath:data.sql
   jpa:
     show-sql: true
     hibernate:
@@ -22,6 +23,3 @@ spring:
       percentage: 1.0
 server:
   port: 8762
-security:
-  basic:
-    enabled: false

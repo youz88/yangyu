@@ -17,6 +17,3 @@ zuul:
     api-a:
       path: /user-api/**
       serviceId: yangyu-study-user-service
-security:
-  basic:
-    enabled: false

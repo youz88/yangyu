@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yangyu</groupId>
-	<artifactId>yangyu-study-hystrix</artifactId>
+	<artifactId>yangyu-study-hystrix-dashboard</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>yangyu-study-hystrix</name>
-	<description>Hystrix Study</description>
+	<name>yangyu-study-hystrix-dashboard</name>
+	<description>Hystrix Dashboard Study</description>
 
 	<parent>
 		<groupId>com.yangyu</groupId>
@@ -20,7 +20,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-hystrix</artifactId>
+			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
 		</dependency>
 
 		<dependency>
@@ -29,4 +29,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 </project>

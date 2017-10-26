@@ -17,6 +17,9 @@
 		<module>yangyu-study-ribbon</module>
 		<module>yangyu-study-user-service</module>
 		<module>yangyu-study-getway-service</module>
+		<module>yangyu-study-zipkin-server</module>
+		<module>yangyu-study-hystrix-dashboard</module>
+		<module>yangyu-study-feign</module>
 	</modules>
 
 	<parent>

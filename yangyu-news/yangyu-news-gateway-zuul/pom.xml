@@ -4,23 +4,23 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yangyu</groupId>
-	<artifactId>yangyu-study-hystrix</artifactId>
+	<artifactId>yangyu-news-gateway-zuul</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>yangyu-study-hystrix</name>
-	<description>Hystrix Study</description>
+	<name>yangyu-news-gateway-zuul</name>
+	<description>网关服务模块</description>
 
 	<parent>
 		<groupId>com.yangyu</groupId>
-		<artifactId>yangyu-0-study</artifactId>
+		<artifactId>yangyu-news</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-hystrix</artifactId>
+			<artifactId>spring-cloud-starter-zuul</artifactId>
 		</dependency>
 
 		<dependency>
@@ -29,4 +29,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 </project>

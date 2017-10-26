@@ -4,29 +4,29 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yangyu</groupId>
-	<artifactId>yangyu-study-hystrix</artifactId>
+	<artifactId>yangyu-news</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>yangyu-study-hystrix</name>
-	<description>Hystrix Study</description>
+	<name>yangyu-news</name>
+	<description>新闻模块根目录</description>
 
 	<parent>
 		<groupId>com.yangyu</groupId>
-		<artifactId>yangyu-0-study</artifactId>
+		<artifactId>yangyu</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
+	<modules>
+		<module>yangyu-news-discovery-eureka</module>
+		<module>yangyu-news-gateway-zuul</module>
+	</modules>
+
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-hystrix</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>com.yangyu</groupId>
+			<artifactId>yangyu-0-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
