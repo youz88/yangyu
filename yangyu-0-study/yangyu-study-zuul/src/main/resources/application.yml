@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: yangyu-study-zuul
+
+server:
+  port: 8094
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+zuul:
+  routes:
+    user:
+      path: /u/**
+      service-id: yangyu-study-user-service

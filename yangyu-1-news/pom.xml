@@ -4,25 +4,29 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yangyu</groupId>
-	<artifactId>yangyu-news-discovery-eureka</artifactId>
+	<artifactId>yangyu-1-news</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>yangyu-news-discovery-eureka</name>
-	<description>Eurek服务注册与发现</description>
+	<name>yangyu-1-news</name>
+	<description>新闻模块根目录</description>
 
 	<parent>
 		<groupId>com.yangyu</groupId>
-		<artifactId>yangyu-news</artifactId>
+		<artifactId>yangyu</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
+	<modules>
+		<module>yangyu-news-discovery-eureka</module>
+		<module>yangyu-news-gateway-zuul</module>
+	</modules>
+
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>com.yangyu</groupId>
+			<artifactId>yangyu-0-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
-
 </project>

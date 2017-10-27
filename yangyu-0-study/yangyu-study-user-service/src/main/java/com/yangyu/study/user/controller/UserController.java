@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by youz on 2017/10/25.
@@ -28,7 +29,8 @@ public class UserController {
     }
 
     @GetMapping("hello")
-    public String hello(){
+    public String hello() throws InterruptedException {
+        TimeUnit.SECONDS.sleep(3L);
         return "hello world";
     }
 
