@@ -16,19 +16,26 @@ public class BeanUtil {
     /**
      * bean属性复制
      * @param source 资源类
-     * @param target 目标类
      * @param clazz
      */
-    public static <T> T copyProperties(Object source, Object target, Class<T> clazz) {
-        String beanKey = generateKey(source.getClass(), clazz);
-        BeanCopier copier = null;
-        if (!beanCopierMap.containsKey(beanKey)) {
-            copier = BeanCopier.create(source.getClass(), clazz, false);
-            beanCopierMap.put(beanKey, copier);
-        } else {
-            copier = beanCopierMap.get(beanKey);
+    public static <T> T copyProperties(Object source, Class<T> clazz) {
+        T target = null;
+        try {
+            target = clazz.newInstance();
+            String beanKey = generateKey(source.getClass(), clazz);
+            BeanCopier copier = null;
+            if (!beanCopierMap.containsKey(beanKey)) {
+                copier = BeanCopier.create(source.getClass(), clazz, false);
+                beanCopierMap.put(beanKey, copier);
+            } else {
+                copier = beanCopierMap.get(beanKey);
+            }
+            copier.copy(source, target, null);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
-        copier.copy(source, target, null);
         return (T) target;
     }
 

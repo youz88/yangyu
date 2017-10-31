@@ -1,6 +1,7 @@
 server:
   port: 18000
-
+  tomcat:
+    uri-encoding: UTF-8
 spring:
   application:
     name: yangyu-news-user-server
@@ -13,7 +14,11 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
 #eureka:
 #  client:
 #    serviceUrl:

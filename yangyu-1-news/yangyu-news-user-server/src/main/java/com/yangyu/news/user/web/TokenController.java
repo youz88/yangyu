@@ -1,7 +1,14 @@
 package com.yangyu.news.user.web;
 
+import com.yangyu.common.util.BeanUtil;
+import com.yangyu.common.util.JwtUtil;
+import com.yangyu.global.model.JwtUser;
+import com.yangyu.news.user.model.User;
+import com.yangyu.news.user.service.UserService;
 import com.yangyu.news.user.web.dto.LoginDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,9 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class TokenController {
 
-    @RequestMapping("/login")
-    public ResponseEntity login(LoginDto loginDto){
+    @Autowired
+    UserService userService;
 
-        return ResponseEntity.ok("登录成功");
+    @RequestMapping("/token")
+    public ResponseEntity login(LoginDto loginDto){
+        User user = userService.login(loginDto.userData());
+        String token = JwtUtil.encode(BeanUtil.copyProperties(user, JwtUser.class).toMap(), "123");
+        return ResponseEntity.ok(token);
     }
+
 }

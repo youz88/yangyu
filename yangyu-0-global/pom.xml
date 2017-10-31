@@ -4,23 +4,18 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yangyu</groupId>
-	<artifactId>yangyu-1-news</artifactId>
+	<artifactId>yangyu-0-global</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>yangyu-1-news</name>
-	<description>新闻模块根目录</description>
+	<name>yangyu-0-global</name>
+	<description>全局服务模块</description>
 
 	<parent>
 		<groupId>com.yangyu</groupId>
 		<artifactId>yangyu</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
-	<modules>
-		<module>yangyu-news-discovery-eureka</module>
-		<module>yangyu-news-gateway-zuul</module>
-	</modules>
 
 	<dependencies>
 		<dependency>

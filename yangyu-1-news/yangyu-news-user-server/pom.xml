@@ -4,28 +4,35 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yangyu</groupId>
-	<artifactId>yangyu-1-news</artifactId>
+	<artifactId>yangyu-news-user-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>yangyu-1-news</name>
-	<description>新闻模块根目录</description>
+	<name>yangyu-news-user-server</name>
+	<description>用户服务模块</description>
 
 	<parent>
 		<groupId>com.yangyu</groupId>
-		<artifactId>yangyu</artifactId>
+		<artifactId>yangyu-1-news</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
-	<modules>
-		<module>yangyu-news-discovery-eureka</module>
-		<module>yangyu-news-gateway-zuul</module>
-	</modules>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.yangyu</groupId>
-			<artifactId>yangyu-0-common</artifactId>
+			<artifactId>yangyu-0-global</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 </project>
