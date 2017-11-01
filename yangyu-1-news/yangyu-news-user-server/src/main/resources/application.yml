@@ -1,5 +1,7 @@
+online: false
+
 server:
-  port: 18000
+  port: 8020
   tomcat:
     uri-encoding: UTF-8
 spring:

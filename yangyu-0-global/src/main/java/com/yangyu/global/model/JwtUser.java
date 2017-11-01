@@ -1,8 +1,6 @@
 package com.yangyu.global.model;
 
-
-
-import com.alibaba.fastjson.JSON;
+import com.yangyu.common.json.JsonUtil;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -32,17 +30,10 @@ public class JwtUser implements Serializable{
     private Boolean isLock;
 
     private String toJson() {
-        return "{" +
-                "id:" + id +
-                ", userName:'" + userName + '\'' +
-                ", password:'" + password + '\'' +
-                ", email:'" + email + '\'' +
-                ", phone:'" + phone + '\'' +
-                ", isLock:" + isLock +
-                '}';
+        return JsonUtil.toJson(this);
     }
 
     public Map toMap(){
-        return JSON.parseObject(this.toJson(),Map.class);
+        return JsonUtil.convert(this,Map.class);
     }
 }

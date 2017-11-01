@@ -18,7 +18,7 @@ public class JwtUtil {
     private static final Integer TIME_OUT = 20000;
 
     public static String  encode(Map<String,Object> claims, String secretKey, Integer exp){
-        Assert.isNull(exp,"超时时间不能为空");
+        U.assertNil(exp,"超时时间不能为空");
         return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(DateUtils.addMilliseconds(new Date(), exp))
