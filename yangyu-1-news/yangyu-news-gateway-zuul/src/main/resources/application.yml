@@ -8,5 +8,5 @@ server:
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://news-discovery-eureka:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
 

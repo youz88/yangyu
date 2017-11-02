@@ -20,6 +20,7 @@
 		<module>yangyu-study-zipkin-server</module>
 		<module>yangyu-study-hystrix-dashboard</module>
 		<module>yangyu-study-feign</module>
+		<module>yangyu-study-zuul</module>
 	</modules>
 
 	<parent>
@@ -28,18 +29,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>1.8</java.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.yangyu</groupId>
-			<artifactId>yangyu-0-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<artifactId>yangyu-common</artifactId>
 		</dependency>
 	</dependencies>
-
 </project>

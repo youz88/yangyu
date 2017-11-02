@@ -2,8 +2,7 @@ online: false
 
 server:
   port: 8020
-  tomcat:
-    uri-encoding: UTF-8
+
 spring:
   application:
     name: yangyu-news-user-server
@@ -16,13 +15,25 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-  http:
-    encoding:
-      force: true
-      charset: utf-8
-      enabled: true
-#eureka:
-#  client:
-#    serviceUrl:
-#      defaultZone: http://localhost:8761/eureka/
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+yangyu:
+  security:
+    jwt:
+      issuer: http://youz.yangyu.com
+      subject:
+      audience:
+      expirationTime: 1200 #20分钟
+      not_before:
+
+security:
+  basic:
+    enabled: false
+  user:
+    name: admin
+    password: admin
 

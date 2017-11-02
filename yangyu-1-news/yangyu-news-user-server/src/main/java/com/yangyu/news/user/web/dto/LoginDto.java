@@ -6,6 +6,7 @@ import com.yangyu.news.user.enums.AccountType;
 import com.yangyu.news.user.model.User;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
@@ -35,7 +36,7 @@ public class LoginDto {
         }else if(accountType.isEmail()){
             this.userName = email;
         }
-        this.password = new String(Base64.getDecoder().decode(password.getBytes(StandardCharsets.UTF_8)));
+        this.password = DigestUtils.md5DigestAsHex(Base64.getDecoder().decode(this.password));
         return JsonUtil.convert(this,User.class);
     }
 }

@@ -8,4 +8,9 @@ public interface UserService {
 
     User login(User user);
 
+    User selectById(Long id);
+
+    User selectByName(String userName);
+
+    void save(User user);
 }

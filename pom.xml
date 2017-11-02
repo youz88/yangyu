@@ -12,7 +12,12 @@
 	<description>Demo project for Spring Boot</description>
 
 	<modules>
-		<module>yangyu-0-common</module>
+		<module>yangyu-0-study</module>
+		<module>yangyu-common</module>
+		<module>yangyu-global</module>
+		<module>yangyu-0-config</module>
+		<module>yangyu-0-eureka</module>
+		<module>yangyu-1-api</module>
 		<module>yangyu-1-news</module>
 	</modules>
 
@@ -27,6 +32,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Dalston.SR4</spring-cloud.version>
+		<spring-security.version>4.2.3.RELEASE</spring-security.version>
 
         <fastjson.version>1.2.7</fastjson.version>
 		<jjwt.version>0.9.0</jjwt.version>
@@ -37,12 +43,17 @@
 		<dependencies>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>yangyu-0-common</artifactId>
+				<artifactId>yangyu-common</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>yangyu-0-global</artifactId>
+				<artifactId>yangyu-global</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>yangyu-1-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
@@ -52,6 +63,12 @@
 				<version>${spring-cloud.version}</version>
 				<type>pom</type>
 				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core</artifactId>
+				<version>${spring-security.version}</version>
 			</dependency>
 
 			<!-- jwt工具包 -->

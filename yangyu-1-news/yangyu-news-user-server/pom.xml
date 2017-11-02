@@ -20,7 +20,25 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.yangyu</groupId>
-			<artifactId>yangyu-0-global</artifactId>
+			<artifactId>yangyu-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.yangyu</groupId>
+			<artifactId>yangyu-global</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.yangyu</groupId>
+			<artifactId>yangyu-1-api</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-security</artifactId>
 		</dependency>
 
 		<dependency>
@@ -30,9 +48,26 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<artifactId>spring-boot-configuration-processor</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<exclusions>
+				<exclusion>
+					<artifactId>jackson-databind</artifactId>
+					<groupId>com.fasterxml.jackson.core</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 	</dependencies>
 
 </project>
