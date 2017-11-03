@@ -22,13 +22,10 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 
 yangyu:
-  security:
-    jwt:
-      issuer: http://youz.yangyu.com
-      subject:
-      audience:
-      expirationTime: 1200 #20分钟
-      not_before:
+  jwt:
+    secretKey: youz
+    issuer: http://youz.yangyu.com
+    expirationTime: 86400000 #60 * 60 * 24 * 1000
 
 security:
   basic:

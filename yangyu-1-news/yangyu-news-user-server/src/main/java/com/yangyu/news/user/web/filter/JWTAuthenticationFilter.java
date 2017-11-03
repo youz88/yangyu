@@ -1,7 +1,9 @@
 package com.yangyu.news.user.web.filter;
 
+import com.yangyu.api.IConfig;
 import com.yangyu.common.Const;
 import io.jsonwebtoken.Jwts;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +20,9 @@ import java.util.ArrayList;
  * Created by youz on 2017/11/2.
  */
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter{
+
+    @Autowired
+    IConfig sysConfig;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
@@ -43,14 +48,14 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter{
         String token = request.getHeader(Const.TOKEN_HEADER);
         if (token != null) {
             // parse the token.
-            String user = Jwts.parser()
-                    .setSigningKey("MyJwtSecret")
+            String userName = Jwts.parser()
+                    .setSigningKey(sysConfig.getValue(Const.SECRET_KEY))
                     .parseClaimsJws(token.replace(Const.TOKEN_PREFIX, ""))
                     .getBody()
                     .getSubject();
 
-            if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
+            if (userName != null) {
+                return new UsernamePasswordAuthenticationToken(userName, null, new ArrayList<>());
             }
             return null;
         }

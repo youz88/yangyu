@@ -6,14 +6,10 @@ import com.yangyu.news.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import static java.util.Collections.emptyList;
 
-/**
- * @author zhaoxinguo on 2017/9/13.
- */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -21,7 +17,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         User user = userRepository.selectByName(username);
         U.assertNil(user,"该用户不存在");
         return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), emptyList());
