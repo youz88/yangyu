@@ -4,14 +4,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yangyu.api.IConfig;
 import com.yangyu.common.Const;
 import com.yangyu.common.util.ApplicationContextUtil;
-import com.yangyu.common.util.U;
+import com.yangyu.global.enums.ConfigType;
+import com.yangyu.global.model.JwtUser;
+import com.yangyu.news.user.web.dto.LoginDto;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -39,7 +41,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
         try {
-            User user = new ObjectMapper().readValue(req.getInputStream(), User.class);
+            LoginDto user = new ObjectMapper().readValue(req.getInputStream(), LoginDto.class);
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             user.getUsername(),
@@ -55,7 +57,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain, Authentication auth) {
         String token = Jwts.builder()
-                .setSubject(((User)auth.getPrincipal()).getUsername())
+                .setSubject(((JwtUser)auth.getPrincipal()).getUsername())
                 .setExpiration(new Date(System.currentTimeMillis() + TIME_OUT))
                 .signWith(SignatureAlgorithm.HS512, getSecretKey())
                 .compact();
@@ -64,6 +66,6 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
     public String getSecretKey() {
         IConfig bean = ApplicationContextUtil.getBean(IConfig.class);
-        return U.isBlank(bean) ? "" : bean.getValue(Const.SECRET_KEY);
+        return bean.getValue(ConfigType.JWT_SECRET);
     }
 }

@@ -12,9 +12,6 @@ public final class Const {
     /** cors 支持的所有方法 */
     public static final String[] SUPPORT_METHODS = new String[] { "HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS" };
 
-    /** 秘钥 */
-    public static final String SECRET_KEY="SECRET_KEY";
-
     public static final String TOKEN_HEADER = "Authorization";
 
     public static final String TOKEN_PREFIX = "Bearer ";

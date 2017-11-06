@@ -1,17 +1,19 @@
 package com.yangyu.api;
 
+import com.yangyu.api.fallback.IConfigFallback;
+import com.yangyu.global.enums.ConfigType;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by youz on 2017/11/2.
  */
-@FeignClient("yangyu-0-config")
-@RequestMapping("/sysConfig")
+@FeignClient(value = "yangyu-0-config",fallback = IConfigFallback.class)
 public interface IConfig {
 
-    @PostMapping("/value")
-    String getValue(@RequestParam("key") String key);
+    @PostMapping("/sysConfig/value")
+    String getValue(@RequestParam("configType") ConfigType configType);
+
+
 }

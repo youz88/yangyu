@@ -1,6 +1,7 @@
 package com.yangyu.news.user.service.impl;
 
 import com.yangyu.news.user.model.GrantedAuthorityImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.util.DigestUtils;
 
 import java.util.ArrayList;
@@ -18,16 +20,15 @@ import java.util.ArrayList;
 /**
  * Created by youz on 2017/11/2.
  */
+@Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
+    @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public CustomAuthenticationProvider(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder){
-        this.userDetailsService = userDetailsService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

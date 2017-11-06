@@ -1,7 +1,10 @@
 package com.yangyu.news.user.config;
 
+import com.yangyu.news.user.handler.JWTLogoutSuccessHandler;
+import com.yangyu.news.user.service.impl.CustomAuthenticationProvider;
 import com.yangyu.news.user.web.filter.JWTAuthenticationFilter;
 import com.yangyu.news.user.web.filter.JWTLoginFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -20,20 +23,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-    private UserDetailsService userDetailsService;
-
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    public WebSecurityConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userDetailsService = userDetailsService;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
+    @Autowired
+    UserDetailsService userDetailsService;
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    CustomAuthenticationProvider customAuthenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/user/signup").permitAll()
                 .anyRequest().authenticated()
+                .and().logout().logoutSuccessHandler(new JWTLogoutSuccessHandler())
                 .and()
                 .addFilter(new JWTLoginFilter(authenticationManager()))
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()));
@@ -41,6 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
+        auth.authenticationProvider(customAuthenticationProvider)
+                .userDetailsService(userDetailsService)
+                .passwordEncoder(bCryptPasswordEncoder);
     }
+
 }

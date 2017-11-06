@@ -19,7 +19,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.yangyu</groupId>
-			<artifactId>yangyu-common</artifactId>
+			<artifactId>yangyu-global</artifactId>
 		</dependency>
 
 		<dependency>

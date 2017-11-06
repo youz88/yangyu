@@ -35,6 +35,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User selectByName(String userName) {
         User user = userRepository.selectByName(userName);
+        U.assertNil(user,"该用户不存在");
         return user;
     }
 
