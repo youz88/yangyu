@@ -1,13 +1,15 @@
 package com.yangyu.news.user.web.filter;
 
 import com.yangyu.api.IConfig;
-import com.yangyu.common.Const;
 import com.yangyu.common.util.ApplicationContextUtil;
+import com.yangyu.common.util.U;
+import com.yangyu.global.AppProperties;
 import com.yangyu.global.enums.ConfigType;
+import com.yangyu.global.model.JwtUser;
+import com.yangyu.news.user.util.SpringSecurityUtil;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
@@ -23,44 +25,42 @@ import java.util.ArrayList;
  */
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter{
 
+
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String header = request.getHeader(Const.TOKEN_HEADER);
+        String header = request.getHeader(AppProperties.getByAppContext().tokenHeader);
 
-        if (header == null || !header.startsWith(Const.TOKEN_PREFIX)) {
+        if (header == null || !header.startsWith(AppProperties.getByAppContext().tokenPrefix)) {
             chain.doFilter(request, response);
             return;
         }
 
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(request);
+        JwtUser authentication = getAuthentication(request);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(request, response);
 
     }
 
-    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-        String token = request.getHeader(Const.TOKEN_HEADER);
+    private JwtUser getAuthentication(HttpServletRequest request) {
+        String token = request.getHeader(AppProperties.getByAppContext().tokenHeader);
         if (token != null) {
-            String userName = Jwts.parser()
-                    .setSigningKey(getSecretKey())
-                    .parseClaimsJws(token.replace(Const.TOKEN_PREFIX, ""))
-                    .getBody()
-                    .getSubject();
-            if (userName != null) {
-                return new UsernamePasswordAuthenticationToken(userName, null, new ArrayList<>());
+            try {
+                String userName = SpringSecurityUtil.getClaims().getSubject();
+                if (userName != null) {
+                    return new JwtUser(userName, null, new ArrayList<>());
+                }
+            }catch (ExpiredJwtException e){
+                U.assertException(true,"token已经过期,请重新获取");
+            }catch (Exception e){
+                U.assertException(true,"JWT签名不匹配");
             }
             return null;
         }
         return null;
-    }
-
-    public String getSecretKey() {
-        IConfig bean = ApplicationContextUtil.getBean(IConfig.class);
-        return bean.getValue(ConfigType.JWT_SECRET);
     }
 }

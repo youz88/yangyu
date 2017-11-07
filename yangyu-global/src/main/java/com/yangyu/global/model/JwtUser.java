@@ -1,30 +1,47 @@
 package com.yangyu.global.model;
 
+import com.yangyu.common.json.JsonUtil;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.Assert;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Collection;
 
 /**
- * Created by youz on 2017/10/31.
+ * Created by youz on 2017/11/7.
  */
 
 @Getter
 @Setter
 @Accessors(chain = true)
-public class JwtUser extends User{
+public class JwtUser extends UsernamePasswordAuthenticationToken {
 
-    private Boolean isLock;
     private Long id;
 
-    public JwtUser(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        super(username, password, authorities);
-        this.id = id;
+    private String nickName;
+
+    private String userName;
+
+    private String email;
+
+    private String phone;
+
+    private Boolean isLock;
+
+    private Boolean authenticated;
+
+    private Collection authorities;
+
+    JwtUser(){
+        super(null,null);
     }
+
+    public JwtUser(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
+        super(principal, credentials, authorities);
+    }
+
+
 }

@@ -1,13 +1,12 @@
 package com.yangyu.news.user.service.impl;
 
 import com.yangyu.common.util.U;
-import com.yangyu.global.model.JwtUser;
 import com.yangyu.news.user.model.User;
 import com.yangyu.news.user.repository.UserRepository;
 import com.yangyu.news.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 /**
  * Created by youz on 2017/10/27.
@@ -32,6 +31,7 @@ public class UserServiceImpl implements UserService{
         return user;
     }
 
+    @Cacheable(value = "user", key = "#userName")
     @Override
     public User selectByName(String userName) {
         User user = userRepository.selectByName(userName);

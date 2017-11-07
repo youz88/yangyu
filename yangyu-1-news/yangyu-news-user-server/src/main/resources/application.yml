@@ -1,4 +1,12 @@
-online: false
+hello: world
+
+yangyu:
+  jwt:
+    tokenPrefix: Bearer
+    tokenHeader: Authorization
+    secretKey: youz
+    issuer: http://youz.yangyu.com
+    expirationTime: 86400000 #超时时间 60 * 60 * 24 * 1000
 
 server:
   port: 8020
@@ -24,12 +32,6 @@ eureka:
 feign:
   hystrix:
     enabled: true
-
-yangyu:
-  jwt:
-    secretKey: youz
-    issuer: http://youz.yangyu.com
-    expirationTime: 86400000 #60 * 60 * 24 * 1000
 
 security:
   basic:

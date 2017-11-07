@@ -2,18 +2,17 @@ package com.yangyu.news.user.web.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yangyu.api.IConfig;
-import com.yangyu.common.Const;
+import com.yangyu.common.json.JsonUtil;
 import com.yangyu.common.util.ApplicationContextUtil;
+import com.yangyu.global.AppProperties;
 import com.yangyu.global.enums.ConfigType;
 import com.yangyu.global.model.JwtUser;
 import com.yangyu.news.user.web.dto.LoginDto;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -22,14 +21,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by youz on 2017/11/2.
  */
 public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
-    /** 超时时间 60 * 60 * 24 * 1000 */
-    private final Integer TIME_OUT = 86400000;
 
     private AuthenticationManager authenticationManager;
 
@@ -43,7 +41,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         try {
             LoginDto user = new ObjectMapper().readValue(req.getInputStream(), LoginDto.class);
             return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
+                    new JwtUser(
                             user.getUsername(),
                             user.getPassword(),
                             new ArrayList<>())
@@ -57,11 +55,12 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain, Authentication auth) {
         String token = Jwts.builder()
-                .setSubject(((JwtUser)auth.getPrincipal()).getUsername())
-                .setExpiration(new Date(System.currentTimeMillis() + TIME_OUT))
+                .addClaims(JsonUtil.convert((JwtUser)auth, Map.class))
+                .setSubject(auth.getPrincipal().toString())
+                .setExpiration(new Date(System.currentTimeMillis() + AppProperties.getByAppContext().expirationTime))
                 .signWith(SignatureAlgorithm.HS512, getSecretKey())
                 .compact();
-        res.addHeader(Const.TOKEN_HEADER, Const.TOKEN_PREFIX + token);
+        res.addHeader(AppProperties.getByAppContext().tokenHeader, AppProperties.getByAppContext().tokenPrefix + " " + token);
     }
 
     public String getSecretKey() {

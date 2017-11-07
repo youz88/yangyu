@@ -3,6 +3,7 @@ package com.yangyu.news.user.model;
 import com.yangyu.news.user.enums.AccountType;
 import lombok.*;
 import lombok.experimental.Accessors;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import java.io.Serializable;
