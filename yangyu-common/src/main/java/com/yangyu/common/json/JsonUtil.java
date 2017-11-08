@@ -83,6 +83,7 @@ public class JsonUtil {
 		try {
 			return BASIC.readValue(json, clazz);
 		} catch (Exception e) {
+		    e.printStackTrace();
 			throw new RuntimeException("json (" + json + ") to object(" + clazz.getName() + ") exception", e);
 		}
 	}

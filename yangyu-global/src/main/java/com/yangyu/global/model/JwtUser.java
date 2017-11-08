@@ -41,6 +41,8 @@ public class JwtUser extends UsernamePasswordAuthenticationToken {
 
     public JwtUser(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
         super(principal, credentials, authorities);
+        this.authorities = getAuthorities();
+        this.authenticated = isAuthenticated();
     }
 
 

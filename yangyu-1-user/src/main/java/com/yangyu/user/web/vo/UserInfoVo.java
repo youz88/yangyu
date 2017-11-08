@@ -13,9 +13,6 @@ import lombok.Setter;
 @Setter
 public class UserInfoVo {
 
-    @ApiModelProperty("用户名")
-    private String userName;
-
     @ApiModelProperty("昵称")
     private String nickName;
 

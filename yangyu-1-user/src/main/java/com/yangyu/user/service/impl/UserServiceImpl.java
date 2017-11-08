@@ -18,13 +18,6 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Override
-    public User login(User user) {
-        User login = userRepository.login(user.getUserName(), user.getPassword());
-        U.assertNil(login,"用户名或密码错误，请重新输入");
-        return login;
-    }
-
-    @Override
     public User selectById(Long id) {
         User user = userRepository.findOne(id);
         U.assertNil(user,"该用户不存在");

@@ -5,6 +5,7 @@ import com.yangyu.config.model.SysConfig;
 import com.yangyu.config.repository.SysConfigRepository;
 import com.yangyu.global.enums.ConfigType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,4 +26,5 @@ public class SysConfigController {
         U.assertNil(sysConfig,"该配置不存在");
         return sysConfig.getValue();
     }
+
 }

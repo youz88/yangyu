@@ -22,7 +22,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         User user = userRepository.selectByName(username);
         U.assertNil(user,"该用户不存在");
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), emptyList());
+        return new org.springframework.security.core.userdetails.User(username, user.getPassword(), emptyList());
     }
 
 }
