@@ -19,6 +19,7 @@
 		<module>yangyu-0-eureka</module>
 		<module>yangyu-1-api</module>
 		<module>yangyu-1-news</module>
+		<module>yangyu-1-user</module>
 	</modules>
 
 	<parent>

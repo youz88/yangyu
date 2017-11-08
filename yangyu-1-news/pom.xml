@@ -19,6 +19,5 @@
 
 	<modules>
 		<module>yangyu-news-gateway-zuul</module>
-		<module>yangyu-news-user-server</module>
 	</modules>
 </project>

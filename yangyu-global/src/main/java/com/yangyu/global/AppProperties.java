@@ -12,13 +12,13 @@ import java.io.IOException;
 @Component
 public class AppProperties {
 
-    @Value("${yangyu.jwt.expirationTime}")
+    @Value("${yangyu.jwt.expirationTime:86400000}")
     public Integer expirationTime;
 
-    @Value("${yangyu.jwt.tokenHeader}")
+    @Value("${yangyu.jwt.tokenHeader:Authorization}")
     public String tokenHeader;
 
-    @Value("${yangyu.jwt.tokenPrefix}")
+    @Value("${yangyu.jwt.tokenPrefix:Bearer}")
     public String tokenPrefix;
 
     public static AppProperties getByAppContext() {
