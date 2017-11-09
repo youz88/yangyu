@@ -1,13 +1,12 @@
 package com.yangyu.user.enums;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
  * Created by youz on 2017/10/27.
  */
-@Getter
-@AllArgsConstructor
 public enum AccountType {
 
     /** 手机 */
@@ -18,6 +17,20 @@ public enum AccountType {
 
     private Integer code;
     private String value;
+
+    AccountType(Integer code, String value) {
+        this.code = code;
+        this.value = value;
+    }
+
+    @JsonValue
+    public Integer getCode() {
+        return code;
+    }
+
+    public String getValue() {
+        return value;
+    }
 
     public boolean isPhone(){
         return this == PHONE;

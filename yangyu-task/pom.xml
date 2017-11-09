@@ -4,12 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yangyu</groupId>
-	<artifactId>yangyu-1-news</artifactId>
+	<artifactId>yangyu-task</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 
-	<name>yangyu-1-news</name>
-	<description>新闻模块根目录</description>
+	<description>定时任务模块</description>
 
 	<parent>
 		<groupId>com.yangyu</groupId>
@@ -17,7 +16,17 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<modules>
-		<module>yangyu-news-gateway-zuul</module>
-	</modules>
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
 </project>

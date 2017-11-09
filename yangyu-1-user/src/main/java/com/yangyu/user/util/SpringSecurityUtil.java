@@ -3,12 +3,16 @@ package com.yangyu.user.util;
 import com.yangyu.api.IConfig;
 import com.yangyu.common.json.JsonUtil;
 import com.yangyu.common.util.ApplicationContextUtil;
+import com.yangyu.common.util.LogUtil;
 import com.yangyu.common.util.RequestUtils;
+import com.yangyu.common.util.U;
 import com.yangyu.global.AppProperties;
 import com.yangyu.global.enums.ConfigType;
 import com.yangyu.global.model.JwtUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+
+import java.util.Collection;
 
 /**
  * Created by youz on 2017/11/3.
@@ -26,9 +30,17 @@ public class SpringSecurityUtil {
         return JsonUtil.convert(getClaims(), JwtUser.class);
     }
 
-    public static void main(String[] args) {
-        String json = "{\"authorities\":[{\"authority\":\"ROLE_ADMIN\"},{\"authority\":\"AUTH_WRITE\"}],\"authenticated\":true,\"principal\":\"admin\",\"id\":1,\"nickName\":\"游客\",\"phone\":\"123456\",\"isLock\":false,\"name\":\"admin\",\"sub\":\"admin\",\"exp\":1510130888}";
-        System.out.println(JsonUtil.toJson(JsonUtil.toObject(json,JwtUser.class)));
+    public static Collection getAuthorities(){
+        String tokenHeader = RequestUtils.getRequest().getHeader(AppProperties.getByAppContext().tokenHeader);
+        try {
+            if(U.isNotBlank(tokenHeader)){
+                return getJwtUser().getAuthorities();
+            }
+        }catch (Exception e){
+            LogUtil.ROOT_LOG.error("解析JWT失败",e);
+            return null;
+        }
+        return null;
     }
 
 }

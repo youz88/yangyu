@@ -9,4 +9,8 @@ public final class Const {
     /** cors 支持的所有方法 */
     public static final String[] SUPPORT_METHODS = new String[] { "HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS" };
 
+    public static final Long ROOT_PERMISSION = 1L;
+
+    public static final String ROLE_DEFAULT = "tourist";
+
 }

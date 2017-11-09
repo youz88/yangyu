@@ -25,7 +25,9 @@ INSERT INTO yangyu_permission(id,system_id,pid,permission_name,permission_type,p
 
 (101,1,2,'全部资讯',1,'news:information:read','/news/information/index','',0,1,0,now()),
 (111,2,3,'最新推荐',1,'blog:recommend:read','/blog/recommend/index','',0,1,0,now()),
-(112,2,3,'我的博客',1,'blog:write:read','/blog/write/index','',0,2,0,now());
+(112,2,3,'我的博客',1,'blog:write:read','/blog/self/index','',0,2,0,now()),
+(121,3,4,'技术问答',1,'technical:question:read','/technical/question/index','',0,1,0,now()),
+(122,3,4,'技术分享',1,'technical:share:read','/technical/share/index','',0,2,0,now());
 
 truncate TABLE yangyu_user_role;
 INSERT INTO yangyu_user_role(id,user_id,role_id) VALUES
@@ -42,22 +44,28 @@ INSERT INTO yangyu_role_permission(id,role_id,permission_id) VALUES
 (5,1,101),
 (6,1,111),
 (7,1,112),
+(8,1,121),
+(9,1,122),
 
-(8,2,1),
-(9,2,2),
-(10,2,3),
-(11,2,4),
-(12,2,101),
-(13,2,111),
-(14,2,112),
+(101,2,1),
+(102,2,2),
+(103,2,3),
+(104,2,4),
+(105,2,101),
+(106,2,111),
+(107,2,112),
+(108,2,121),
+(109,2,122),
 
-(15,3,1),
-(16,3,2),
-(17,3,3),
-(18,3,4),
-(19,3,101),
-(20,3,111),
-(21,3,112);
+(201,3,1),
+(202,3,2),
+(203,3,3),
+(204,3,4),
+(205,3,101),
+(206,3,111),
+(207,3,112),
+(208,3,121),
+(209,3,122);
 
 
 

@@ -1,4 +1,4 @@
-package com.yangyu.user.service.impl;
+package com.yangyu.user.security;
 
 import com.yangyu.common.util.U;
 import com.yangyu.user.model.User;

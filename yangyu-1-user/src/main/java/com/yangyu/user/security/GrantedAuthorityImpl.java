@@ -1,4 +1,4 @@
-package com.yangyu.user.service.impl;
+package com.yangyu.user.security;
 
 import org.springframework.security.core.GrantedAuthority;
 

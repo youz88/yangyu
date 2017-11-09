@@ -1,6 +1,6 @@
 package com.yangyu.user.config;
 
-import com.yangyu.user.service.impl.CustomAuthenticationProvider;
+import com.yangyu.user.security.CustomAuthenticationProvider;
 import com.yangyu.user.web.filter.JWTAuthenticationFilter;
 import com.yangyu.user.web.filter.JWTLoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable().authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/user/signup").permitAll()
+                .antMatchers(HttpMethod.POST, "/user/signup","/permission/all").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTLoginFilter(authenticationManager()))

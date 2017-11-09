@@ -15,11 +15,12 @@
 		<module>yangyu-0-study</module>
 		<module>yangyu-common</module>
 		<module>yangyu-global</module>
+		<module>yangyu-task</module>
 		<module>yangyu-0-config</module>
 		<module>yangyu-0-eureka</module>
 		<module>yangyu-1-api</module>
-		<module>yangyu-1-news</module>
 		<module>yangyu-1-user</module>
+		<module>yangyu-2-news</module>
 	</modules>
 
 	<parent>
