@@ -20,11 +20,38 @@ public class News {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * 标题
+     */
+    @Column(length = 50)
     private String title;
 
+    /**
+     * 作者
+     */
+    @Column(length = 20)
     private String author;
 
+    /**
+     * 内容
+     */
+    @Column(length = 200)
+    private String contentPart;
+
+    @Lob
+    @Column(columnDefinition = "text")
     private String content;
 
-    private Long create_date;
+    @Column
+    private Long createId;
+
+    @Column
+    private Long createDate;
+
+    @Column
+    private Long modifyId;
+
+    @Column
+    private Long modifyDate;
+
 }

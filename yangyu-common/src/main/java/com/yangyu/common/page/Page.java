@@ -1,6 +1,6 @@
 package com.yangyu.common.page;
 
-import io.swagger.annotations.ApiParam;
+//import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,9 +25,9 @@ public class Page implements Serializable {
 
     private static final int MAX_LIMIT = 1000;
 
-    @ApiParam("当前页数. 不传或传入 0, 或传入负数, 或传入非数字)则默认是 " + DEFAULT_PAGE_NO)
+//    @ApiParam("当前页数. 不传或传入 0, 或传入负数, 或传入非数字)则默认是 " + DEFAULT_PAGE_NO)
     private int page;
-    @ApiParam("每页条数. 不传或传入 0, 或传入负数, 或传入非数字, 或大于 " + MAX_LIMIT + ")则默认是 " + DEFAULT_LIMIT)
+//    @ApiParam("每页条数. 不传或传入 0, 或传入负数, 或传入非数字, 或大于 " + MAX_LIMIT + ")则默认是 " + DEFAULT_LIMIT)
     private int limit;
 
     public Page(String page, String limit) {

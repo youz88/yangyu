@@ -11,6 +11,6 @@ public final class Const {
 
     public static final Long ROOT_PERMISSION = 1L;
 
-    public static final String ROLE_DEFAULT = "tourist";
+    public static final String[] ROLE_DEFAULT = new String[]{"tourist"};
 
 }

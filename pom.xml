@@ -16,10 +16,11 @@
 		<module>yangyu-common</module>
 		<module>yangyu-global</module>
 		<module>yangyu-task</module>
+		<module>yangyu-web</module>
 		<module>yangyu-0-config</module>
 		<module>yangyu-0-eureka</module>
-		<module>yangyu-1-api</module>
 		<module>yangyu-1-user</module>
+		<module>yangyu-1-api</module>
 		<module>yangyu-2-news</module>
 	</modules>
 
@@ -56,6 +57,11 @@
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>yangyu-1-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>yangyu-1-user-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 

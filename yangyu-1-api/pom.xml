@@ -20,16 +20,28 @@
 		<dependency>
 			<groupId>com.yangyu</groupId>
 			<artifactId>yangyu-global</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.yangyu</groupId>
+			<artifactId>yangyu-1-user-api</artifactId>
 		</dependency>
 
 		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-feign</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

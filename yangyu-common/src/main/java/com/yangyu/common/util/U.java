@@ -44,7 +44,7 @@ public final class U {
     /** 中文 */
     private static final String CHINESE = "[\\u4e00-\\u9fa5]";
     /** 是否是移动端: https://gist.github.com/dalethedeveloper/1503252 */
-    private static final String MOBILE = "(?i)Mobile|iP(hone|od|ad)|Android|BlackBerry|Blazer|PSP|UCWEB|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Dol(f|ph)in|Skyfire|Zune";
+    private static final String MOBILE = "(?i)Mobile|iP(hone|od|ad)|Android|BlackBerry|Blazer|PSP|UCWEB|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|controller)OS|Fennec|Minimo|Opera M(obi|ini)|Dol(f|ph)in|Skyfire|Zune";
     /** 是否是 iOS 端 */
     private static final String IOS = "(?i)iP(hone|od|ad)";
     /** 是否是 android 端 */

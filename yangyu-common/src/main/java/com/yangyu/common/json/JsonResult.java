@@ -3,7 +3,7 @@ package com.yangyu.common.json;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.yangyu.common.exception.NotLoginException;
 import com.yangyu.common.util.U;
-import io.swagger.annotations.ApiModelProperty;
+//import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -37,15 +37,15 @@ public class JsonResult<T> {
      *   返回 10 时导向登录页面引导用户登录.
      * </pre>
      */
-    @ApiModelProperty("0(成功, 操作 data 项或显示 msg 给用户看), 返回码 --> 1(失败, 显示 msg 给用户看), 10(未登录, 将用户导到登录页)")
+//    @ApiModelProperty("0(成功, 操作 data 项或显示 msg 给用户看), 返回码 --> 1(失败, 显示 msg 给用户看), 10(未登录, 将用户导到登录页)")
     private int code = Code.FAIL.flag;
 
     /** 返回说明. 如: 用户名密码错误, 收货地址添加成功 等 */
-    @ApiModelProperty("返回说明. 如: 用户名密码错误, 收货地址添加成功 等")
+//    @ApiModelProperty("返回说明. 如: 用户名密码错误, 收货地址添加成功 等")
     private String msg = U.EMPTY;
 
     /** 返回的数据. 具体是返回实体 {"id":1} 还是列表 [{"id":1},{"id":2}] 依具体的业务而定 */
-    @ApiModelProperty("返回的数据. 具体是返回实体 {\"id\":1} 还是列表 [{\"id\":1},{\"id\":2}] 依具体的业务而定")
+//    @ApiModelProperty("返回的数据. 具体是返回实体 {\"id\":1} 还是列表 [{\"id\":1},{\"id\":2}] 依具体的业务而定")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
 
