@@ -1,3 +1,11 @@
 yangyu:
   news:
     fileName: news.py
+
+spring:
+  application:
+    name: yangyu-task
+
+server:
+  port: 8091
+

@@ -1,5 +1,11 @@
 package com.yangyu.task.news;
 
+import com.google.common.collect.Lists;
+import com.yangyu.api.NewsApi;
+import com.yangyu.common.json.JsonUtil;
+import com.yangyu.news.api.dto.NewsSaveDto;
+import com.yangyu.news.api.vo.NewsVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -9,6 +15,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by youz on 2017/11/9.
@@ -19,8 +27,19 @@ public class NewsTask{
     @Value("${yangyu.news.fileName}")
     private String fileName;
 
-    @Scheduled(cron = "0/10 * * * * ?")
+    @Autowired
+    private NewsApi newsApi;
+
+    @Scheduled(cron = "0/30 * * * * ?")
+//    @Scheduled(cron = "0 0 0/1 * * ? ")
     public void catchNews(){
+        System.out.println("--------------------------");
+        List<NewsSaveDto> list = readData();
+        newsApi.save(list);
+    }
+
+    public List<NewsSaveDto> readData(){
+        StringBuffer buffer = new StringBuffer("[");
         String filePath = NewsTask.class.getResource("/").getPath().substring(1)+fileName;
         String[] arg = new String[]{"python",filePath,"1"};
         BufferedReader br = null;
@@ -30,7 +49,7 @@ public class NewsTask{
             br = new BufferedReader(new InputStreamReader(is));
             String line = null;
             while((line=br.readLine())!=null){
-                System.out.println(line);
+                buffer.append(line).append(",");
             }
         }catch (IOException e){
             e.printStackTrace();
@@ -42,6 +61,9 @@ public class NewsTask{
                 e.printStackTrace();
             }
         }
+        List<NewsSaveDto> list = JsonUtil.toList(buffer.substring(0, buffer.length() - 1) + "]", NewsSaveDto.class);
+        buffer.setLength(0);
+        return list;
     }
 
 }

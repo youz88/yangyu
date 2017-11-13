@@ -4,31 +4,23 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yangyu</groupId>
-	<artifactId>yangyu-1-api</artifactId>
+	<artifactId>yangyu-user-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<description>Api接口</description>
+	<description>用户服务API</description>
 
 	<parent>
 		<groupId>com.yangyu</groupId>
-		<artifactId>yangyu</artifactId>
+		<artifactId>yangyu-1-user</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.yangyu</groupId>
-			<artifactId>yangyu-global</artifactId>
+			<artifactId>yangyu-common</artifactId>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.yangyu</groupId>
-			<artifactId>yangyu-user-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.yangyu</groupId>
-			<artifactId>yangyu-news-api</artifactId>
 		</dependency>
 
 		<dependency>
@@ -36,15 +28,10 @@
 			<artifactId>springfox-swagger2</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-feign</artifactId>
-			<scope>provided</scope>
-		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-hystrix</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

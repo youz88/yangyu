@@ -4,15 +4,15 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yangyu</groupId>
-	<artifactId>yangyu-1-api</artifactId>
+	<artifactId>yangyu-user-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<description>Api接口</description>
+	<description>用户服务</description>
 
 	<parent>
 		<groupId>com.yangyu</groupId>
-		<artifactId>yangyu</artifactId>
+		<artifactId>yangyu-1-user</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
@@ -20,32 +20,43 @@
 		<dependency>
 			<groupId>com.yangyu</groupId>
 			<artifactId>yangyu-global</artifactId>
-			<scope>provided</scope>
 		</dependency>
+
+        <dependency>
+            <groupId>com.yangyu</groupId>
+            <artifactId>yangyu-user-api</artifactId>
+        </dependency>
+
 		<dependency>
-			<groupId>com.yangyu</groupId>
-			<artifactId>yangyu-user-api</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
+
 		<dependency>
-			<groupId>com.yangyu</groupId>
-			<artifactId>yangyu-news-api</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-feign</artifactId>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-hystrix</artifactId>
-			<scope>provided</scope>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

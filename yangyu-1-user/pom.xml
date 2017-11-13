@@ -18,8 +18,8 @@
 	</parent>
 
 	<modules>
-		<module>yangyu-1-user-api</module>
-		<module>yangyu-1-user-server</module>
+		<module>yangyu-user-api</module>
+		<module>yangyu-user-server</module>
 	</modules>
 
 </project>

@@ -61,7 +61,12 @@
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
-				<artifactId>yangyu-1-user-api</artifactId>
+				<artifactId>yangyu-user-api</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>yangyu-news-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
