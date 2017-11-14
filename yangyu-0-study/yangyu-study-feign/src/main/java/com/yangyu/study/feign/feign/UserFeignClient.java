@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 /**
  * Created by youz on 2017/10/26.
  */
@@ -15,4 +17,7 @@ public interface UserFeignClient {
 
     @RequestMapping("/{id}")
     User info(@RequestParam("id") Long id);
+
+    @RequestMapping("/list")
+    User list(@RequestParam("list") List<User> list);
 }

@@ -5,12 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+import java.util.List;
+
 /**
  * Created by youz on 2017/11/13.
  */
 @Getter
 @Setter
-@NoArgsConstructor
 public class NewsSaveDto {
 
     @ApiModelProperty("标题")
@@ -23,8 +25,9 @@ public class NewsSaveDto {
     private String contentPart;
 
     @ApiModelProperty("发表时间")
-    private String createDate;
+    private String publishDate;
 
     @ApiModelProperty("链接地址")
     private String href;
+
 }

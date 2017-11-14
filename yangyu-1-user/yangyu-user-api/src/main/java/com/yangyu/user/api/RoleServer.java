@@ -19,5 +19,5 @@ public interface RoleServer {
 
     @ApiOperation("获取用户详情")
     @PostMapping(value = "/info/{id}")
-    List<RoleVo> selectByUser(@RequestParam("id") @PathVariable("id") Long id);
+    List<RoleVo> selectByUser(@PathVariable("id") Long id);
 }

@@ -19,4 +19,5 @@ public class UserController {
     public User info(@PathVariable Long id){
         return restTemplate.getForObject("http://yangyu-study-user-service/user/" + id, User.class);
     }
+
 }

@@ -12,6 +12,14 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  data:
+    elasticsearch:
+      cluster-name: youz
+      cluster-nodes: 119.23.13.226:9300
+      local: false
+      repositories:
+          enable: true
+
 eureka:
   client:
     serviceUrl:

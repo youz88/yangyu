@@ -13,4 +13,8 @@ public final class Const {
 
     public static final String[] ROLE_DEFAULT = new String[]{"tourist"};
 
+    public static final Long SUPER_ID = 0L;
+
+    public static final String NEWS_HREF = "yangyu-2-news-href";
+
 }

@@ -1,11 +1,13 @@
 package com.yangyu.news.model;
 
+import com.yangyu.common.Const;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by youz on 2017/11/9.
@@ -36,12 +38,8 @@ public class News {
     /**
      * 内容
      */
-    @Column(length = 200)
+    @Column(length = 260)
     private String contentPart;
-
-    @Lob
-    @Column(columnDefinition = "text")
-    private String content;
 
     /**
      * 发表时间
@@ -56,10 +54,10 @@ public class News {
     private String href;
 
     @Column
-    private Long createId;
+    private Long createId = Const.SUPER_ID;
 
     @Column
-    private Long createDate;
+    private Long createDate = new Date().getTime();
 
     @Column
     private Long modifyId;

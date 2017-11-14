@@ -6,7 +6,7 @@
 	<groupId>com.yangyu</groupId>
 	<artifactId>yangyu-1-user</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
 	<name>yangyu-1-user</name>
 	<description>用户服务模块</description>

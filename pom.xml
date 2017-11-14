@@ -36,6 +36,7 @@
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Dalston.SR4</spring-cloud.version>
 		<spring-security.version>4.2.3.RELEASE</spring-security.version>
+		<elasticsearch.version>5.4.0</elasticsearch.version>
 
         <fastjson.version>1.2.7</fastjson.version>
 		<jjwt.version>0.9.0</jjwt.version>
@@ -84,6 +85,12 @@
 				<version>${spring-security.version}</version>
 			</dependency>
 
+			<!--<dependency>-->
+				<!--<groupId>org.elasticsearch</groupId>-->
+				<!--<artifactId>elasticsearch</artifactId>-->
+				<!--<version>${elasticsearch.version}</version>-->
+			<!--</dependency>-->
+
 			<!-- jwt工具包 -->
 			<dependency>
 				<groupId>io.jsonwebtoken</groupId>
@@ -104,4 +111,44 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>deploy</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<phase>deploy</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>deploy</id>
+						<phase>deploy</phase>
+						<goals><goal>deploy</goal></goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

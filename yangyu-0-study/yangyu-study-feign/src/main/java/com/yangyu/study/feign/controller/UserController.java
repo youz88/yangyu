@@ -1,5 +1,6 @@
 package com.yangyu.study.feign.controller;
 
+import com.google.common.collect.Lists;
 import com.yangyu.study.feign.feign.UserFeignClient;
 import com.yangyu.study.feign.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,12 @@ public class UserController {
     @GetMapping("/{id}")
     public User info(@PathVariable Long id){
         return userFeignClient.info(id);
+    }
+
+    @GetMapping("/list")
+    public User info(){
+        User user = new User();
+        user.setId(1L);
+        return userFeignClient.list(Lists.newArrayList(user));
     }
 }

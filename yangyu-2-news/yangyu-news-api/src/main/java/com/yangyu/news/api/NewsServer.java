@@ -2,12 +2,12 @@ package com.yangyu.news.api;
 
 import com.yangyu.common.json.JsonResult;
 import com.yangyu.news.api.dto.NewsSaveDto;
+import com.yangyu.news.api.dto.NewsSaveDtoList;
 import com.yangyu.news.api.vo.NewsVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import sun.misc.Request;
 
 import java.util.List;
 
@@ -20,10 +20,10 @@ import java.util.List;
 public interface NewsServer {
 
     @ApiOperation("查询资讯信息列表")
-    @RequestMapping("/save")
-    void save(@RequestParam("list") List<NewsSaveDto> list);
+    @RequestMapping(value = "/save")
+    void save(@RequestBody List<NewsSaveDto> list);
 
     @ApiOperation("查询资讯信息列表")
-    @RequestMapping("/list")
+    @GetMapping("/list")
     JsonResult<NewsVo> list();
 }

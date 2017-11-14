@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -26,6 +27,11 @@ public class UserController {
     @GetMapping("/{id}")
     public User info(@PathVariable Long id){
         return userReponsitory.findOne(id);
+    }
+
+    @GetMapping("/list")
+    public void test(List<User> list){
+        System.out.println(list);
     }
 
     @GetMapping("hello")

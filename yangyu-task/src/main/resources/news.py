@@ -39,11 +39,13 @@ class News:
         pattern = re.compile(r'class="text-ellipsis">(.*?)</span>.*?summary">(.*?)</div>.*?<span class="mr"><a.*?>(.*?)</a>.*?发布于(.*?)</span>.*?<a href="(.*?)"',re.S)
         items = re.findall(pattern,page)
         contents = []
-        contentMain = ''
         for item in items:
+            contentPart = item[1]
+            if len(contentPart) > 250:
+                contentPart = str(contentPart).decode("utf-8")[:250].encode("utf-8") + '...'
             #拼接json字符串
-            contents.append('{"title":"'+item[0]+'","contentPart":"'+item[1]+'","author":"'+item[2]+
-                            '","createDate":"'+str(item[3]).strip()+'","href":"'+item[4]+'"}')
+            contents.append('{"title":"'+item[0]+'","contentPart":"'+contentPart+'","author":"'+item[2]+
+                            '","publishDate":"'+str(item[3]).strip()+'","href":"'+item[4]+'"}')
         return contents
 
     def start(self):

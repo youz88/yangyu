@@ -5,6 +5,7 @@ import com.yangyu.common.json.JsonResult;
 import com.yangyu.common.util.LogUtil;
 import com.yangyu.common.util.U;
 import com.yangyu.news.api.dto.NewsSaveDto;
+import com.yangyu.news.api.dto.NewsSaveDtoList;
 import com.yangyu.news.api.vo.NewsVo;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,7 @@ public class INewsFallback implements FallbackFactory<NewsApi> {
             @Override
             public void save(List<NewsSaveDto> list) {
                 LogUtil.ROOT_LOG.error("服务器异常,保存失败");
+
             }
 
             @Override

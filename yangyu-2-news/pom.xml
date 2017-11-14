@@ -6,7 +6,7 @@
 	<groupId>com.yangyu</groupId>
 	<artifactId>yangyu-2-news</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>pom</packaging>
 
 	<description>咨询服务模块</description>
 
