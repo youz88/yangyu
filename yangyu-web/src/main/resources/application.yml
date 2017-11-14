@@ -1,0 +1,30 @@
+yangyu:
+  jwt:
+    tokenPrefix: Bearer
+    tokenHeader: Authorization
+    secretKey: youz
+    issuer: http://youz.yangyu.com
+    expirationTime: 86400000 #超时时间 60 * 60 * 24 * 1000
+
+server:
+  port: 8090
+
+spring:
+  application:
+    name: yangyu-web
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+feign:
+  hystrix:
+    enabled: true
+
+security:
+  basic:
+    enabled: false
+  user:
+    name: admin
+    password: admin
