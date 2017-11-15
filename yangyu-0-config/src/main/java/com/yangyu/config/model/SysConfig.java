@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by youz on 2017/11/2.
  */
 @Entity
-@Table(name = "sys_config")
+@Table(name = "yangyu_config")
 @Getter
 @Setter
 public class SysConfig {

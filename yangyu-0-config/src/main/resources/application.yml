@@ -4,10 +4,11 @@ spring:
   application:
     name: yangyu-0-config
   datasource:
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://192.168.99.100:3306/yangyu
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root
+    data: classpath:data.sql
   jpa:
     show-sql: true
     hibernate:

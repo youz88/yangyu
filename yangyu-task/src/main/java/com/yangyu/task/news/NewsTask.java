@@ -3,12 +3,12 @@ package com.yangyu.task.news;
 import com.google.common.hash.BloomFilter;
 import com.google.common.hash.Funnels;
 import com.yangyu.api.NewsApi;
+import com.yangyu.common.Const;
 import com.yangyu.common.json.JsonUtil;
 import com.yangyu.global.service.CacheService;
 import com.yangyu.news.api.dto.NewsSaveDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -68,20 +68,26 @@ public class NewsTask{
         }
         List<NewsSaveDto> list = JsonUtil.toList(buffer.substring(0, buffer.length() - 1) + "]", NewsSaveDto.class);
         buffer = null;
-        return list;
+        return removeRepeat(list);
     }
 
     public List<NewsSaveDto> removeRepeat(List<NewsSaveDto> list){
         Iterator<NewsSaveDto> iterator = list.iterator();
         while(iterator.hasNext()){
-            NewsSaveDto next = iterator.next();
-            if(hrefFileter.mightContain(next.getHref())){
-                //TODO 由于存在误判,所以需要再次进行准确的判断
+            String nextHref = iterator.next().getHref();
+            //使用布隆过滤器(由于存在误判,所以需要再次判断)
+            if(hrefFileter.mightContain(nextHref) &&
+                    cacheService.setIsMember(Const.NEWS_HREF,nextHref)){
                 //如果已经存在，则删除
-            }else{
-                hrefFileter.put(next.getHref().hashCode());
+                iterator.remove();
+                continue;
             }
+            hrefFileter.put(nextHref);
+            cacheService.set(Const.NEWS_HREF,nextHref);
+
         }
-        return null;
+        return list;
     }
+
+
 }

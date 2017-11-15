@@ -4,7 +4,7 @@ spring:
   application:
     name: yangyu-2-news
   datasource:
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://192.168.99.100:3306/yangyu?useSSL=false&characterEncoding=utf8
     driver-class-name: com.mysql.jdbc.Driver
     username: root
     password: root

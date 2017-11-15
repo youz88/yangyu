@@ -85,11 +85,11 @@
 				<version>${spring-security.version}</version>
 			</dependency>
 
-			<!--<dependency>-->
-				<!--<groupId>org.elasticsearch</groupId>-->
-				<!--<artifactId>elasticsearch</artifactId>-->
-				<!--<version>${elasticsearch.version}</version>-->
-			<!--</dependency>-->
+			<dependency>
+				<groupId>org.elasticsearch</groupId>
+				<artifactId>elasticsearch</artifactId>
+				<version>${elasticsearch.version}</version>
+			</dependency>
 
 			<!-- jwt工具包 -->
 			<dependency>

@@ -1,5 +1,6 @@
 package com.yangyu.global.service;
 
+import com.yangyu.common.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
@@ -183,9 +184,12 @@ public class CacheService {
         return stringRedisTemplate.opsForZSet().add(key,set);
     }
 
+    public void setAdd(String key,String value){
+        stringRedisTemplate.opsForSet().add(key,value);
+    }
 
-    public void set(){
-
+    public boolean setIsMember(String key, String value){
+        return stringRedisTemplate.opsForSet().isMember(key,value);
     }
 
 }
