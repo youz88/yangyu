@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PageInfo<T> implements Serializable {
 
-    private int total;
+    private long total;
     private List<T> list;
 
     @SuppressWarnings("unchecked")

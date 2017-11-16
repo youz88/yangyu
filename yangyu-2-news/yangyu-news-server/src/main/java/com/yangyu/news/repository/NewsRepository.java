@@ -1,4 +1,4 @@
-package com.yangyu.news.reposity;
+package com.yangyu.news.repository;
 
 import com.yangyu.news.model.News;
 import org.springframework.data.jpa.repository.JpaRepository;

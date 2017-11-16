@@ -1,10 +1,9 @@
 package com.yangyu.news.model;
 
 import com.yangyu.common.Const;
-import io.swagger.annotations.ApiModelProperty;
+import com.yangyu.common.annotation.Document;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.Date;

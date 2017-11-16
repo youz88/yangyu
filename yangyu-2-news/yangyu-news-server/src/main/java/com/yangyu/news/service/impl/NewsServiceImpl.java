@@ -1,8 +1,7 @@
 package com.yangyu.news.service.impl;
 
-import com.google.common.collect.Lists;
 import com.yangyu.news.model.News;
-import com.yangyu.news.reposity.NewsRepository;
+import com.yangyu.news.repository.NewsRepository;
 import com.yangyu.news.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

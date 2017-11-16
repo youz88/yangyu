@@ -1,5 +1,6 @@
 package com.yangyu.news.api.vo;
 
+import com.yangyu.common.annotation.Document;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,10 +15,11 @@ import java.io.Serializable;
 @Getter
 @Setter
 @NoArgsConstructor
+@Document(index = "yangyu-news-${YYYY.MM.dd}", type = "news")
 public class NewsVo {
 
     @ApiModelProperty("资讯ID")
-    private Long id;
+    private Integer id;
 
     @ApiModelProperty("标题")
     private String title;
@@ -26,10 +28,10 @@ public class NewsVo {
     private String author;
 
     @ApiModelProperty("部分内容")
-    private String contentPart;
+    private String content_part;
 
     @ApiModelProperty("发表时间")
-    private String createDate;
+    private String publish_date;
 
     @ApiModelProperty("链接地址")
     private String href;

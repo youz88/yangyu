@@ -173,4 +173,10 @@ public class DateUtil {
 
         return Days.daysBetween(getDateTimeStart(start), getDateTimeStart(end)).getDays();
     }
+
+    /** 格式化日期对象成字符串 */
+    public static String formatDate(Date date, String dateFormat) {
+        if (U.isBlank(date) || U.isBlank(dateFormat)) return U.EMPTY;
+        return DateTimeFormat.forPattern(dateFormat).print(date.getTime());
+    }
 }
