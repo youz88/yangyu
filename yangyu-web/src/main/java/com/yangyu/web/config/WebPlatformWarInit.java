@@ -7,13 +7,19 @@ import com.yangyu.common.converter.StringToEnumConverter;
 import com.yangyu.common.converter.StringToNumberConverter;
 import com.yangyu.common.converter.StringTrimAndEscapeConverter;
 import com.yangyu.common.json.JsonUtil;
+import com.yangyu.common.page.Page;
 import com.yangyu.common.util.A;
 import com.yangyu.common.util.LogUtil;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.MethodParameter;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.bind.support.WebDataBinderFactory;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -58,6 +64,21 @@ public class WebPlatformWarInit extends WebMvcConfigurerAdapter {
                 LogUtil.ROOT_LOG.info("return json: {}", JsonUtil.toRender(object));
             }
         }
+    }
+
+    @Override
+    public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+        argumentResolvers.add(new HandlerMethodArgumentResolver() {
+            @Override
+            public boolean supportsParameter(MethodParameter parameter) {
+                return Page.class.isAssignableFrom(parameter.getParameterType());
+            }
+            @Override
+            public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
+                                          NativeWebRequest request, WebDataBinderFactory factory) throws Exception {
+                return new Page(request.getParameter(Page.GLOBAL_PAGE), request.getParameter(Page.GLOBAL_LIMIT));
+            }
+        });
     }
 
     @Override

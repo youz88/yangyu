@@ -39,14 +39,16 @@ public class NewsTask{
     @Scheduled(cron = "0/30 * * * * ?")
 //    @Scheduled(cron = "0 0 0/1 * * ? ")
     public void catchNews(){
-        List<NewsSaveDto> list = readData();
-        newsApi.save(list);
+        for(int i=1;i<5;i++){
+            List<NewsSaveDto> list = readData(i);
+            newsApi.save(list);
+        }
     }
 
-    public List<NewsSaveDto> readData(){
+    public List<NewsSaveDto> readData(Integer page){
         StringBuffer buffer = new StringBuffer("[");
         String filePath = NewsTask.class.getResource("/").getPath().substring(1)+fileName;
-        String[] arg = new String[]{"python",filePath,"1"};
+        String[] arg = new String[]{"python",filePath,page.toString()};
         BufferedReader br = null;
         InputStream is = null;
         try {

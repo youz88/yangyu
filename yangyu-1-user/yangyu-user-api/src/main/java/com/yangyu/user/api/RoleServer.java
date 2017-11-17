@@ -14,7 +14,7 @@ import java.util.List;
  */
 @RestController
 @Api("角色服务API")
-@RequestMapping(value = "/role")
+@RequestMapping(value = "/yangyu-role")
 public interface RoleServer {
 
     @ApiOperation("获取用户详情")

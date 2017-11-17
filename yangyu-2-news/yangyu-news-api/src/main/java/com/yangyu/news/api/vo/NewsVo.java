@@ -36,4 +36,7 @@ public class NewsVo {
     @ApiModelProperty("链接地址")
     private String href;
 
+    @ApiModelProperty("头像")
+    private String avatar;
+
 }

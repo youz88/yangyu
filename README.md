@@ -4,9 +4,16 @@
 ####docker ELK启动
 
 
-- elasticsearch: docker run --name=elasticsearch -p 9200:9200 -p 9300:9300 -v /usr/elk-config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v /usr/elk-config/jvm.options:/etc/elasticsearch/jvm.options -d XXX]
+- elasticsearch: 
+  - 设置docker 
+    ```
+    1.vi /etc/sysctl.conf
+    2.vm.max_map_count=655360
+    3.sysctl -p
+    ``` 
+  - docker run --name=elasticsearch -p 9200:9200 -p 9300:9300 -v /usr/elk-config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v /usr/elk-config/jvm.options:/etc/elasticsearch/jvm.options -d XXX]
 - kibana: docker run --name kibana -e ELASTICSEARCH_URL=http://192.168.99.100:9200 -p 5601:5601 -d XXX
-- logstash: docker run -it --rm XXX -e 'input {
+- logstash(需要含有mysql-connector-java): docker run -it --rm XXX -e 'input {
    jdbc {
      jdbc_driver_library => "/usr/download/mysql-connector-java-5.1.21.jar"
      jdbc_driver_class => "com.mysql.jdbc.Driver"

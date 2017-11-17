@@ -36,7 +36,7 @@ class News:
                 return None
 
     def getContent(self,page):
-        pattern = re.compile(r'class="text-ellipsis">(.*?)</span>.*?summary">(.*?)</div>.*?<span class="mr"><a.*?>(.*?)</a>.*?发布于(.*?)</span>.*?<a href="(.*?)"',re.S)
+        pattern = re.compile(r'class="text-ellipsis">(.*?)</span>.*?summary">(.*?)</div>.*?"from">.*?<a.*?<img src="(.*?)".*?<span class="mr"><a.*?>(.*?)</a>.*?发布于(.*?)</span>.*?<a href="(.*?)"',re.S)
         items = re.findall(pattern,page)
         contents = []
         for item in items:
@@ -44,8 +44,8 @@ class News:
             if len(contentPart) > 250:
                 contentPart = str(contentPart).decode("utf-8")[:250].encode("utf-8") + '...'
             #拼接json字符串
-            contents.append('{"title":"'+item[0]+'","contentPart":"'+contentPart+'","author":"'+item[2]+
-                            '","publishDate":"'+str(item[3]).strip()+'","href":"'+item[4]+'"}')
+            contents.append('{"title":"'+item[0]+'","contentPart":"'+contentPart+'","avatar":"'+item[2]+
+                            '","author":"'+item[3]+'","publishDate":"'+str(item[4]).strip()+'","href":"'+item[5]+'"}')
         return contents
 
     def start(self):
@@ -57,4 +57,5 @@ class News:
 
 baseUrl = 'https://www.oschina.net'
 osc = News(baseUrl=baseUrl,pageNo=sys.argv[1])
+# osc = News(baseUrl=baseUrl,pageNo=1)
 osc.start()

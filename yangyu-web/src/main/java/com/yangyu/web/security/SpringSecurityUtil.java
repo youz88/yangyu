@@ -1,6 +1,7 @@
 package com.yangyu.web.security;
 
 import com.yangyu.api.ConfigApi;
+import com.yangyu.common.Const;
 import com.yangyu.common.json.JsonUtil;
 import com.yangyu.common.util.ApplicationContextUtil;
 import com.yangyu.common.util.LogUtil;
@@ -38,9 +39,8 @@ public class SpringSecurityUtil {
             }
         }catch (Exception e){
             LogUtil.ROOT_LOG.error("解析JWT失败",e);
-            return null;
         }
-        return null;
+        return Const.ROLE_DEFAULT;
     }
 
 }

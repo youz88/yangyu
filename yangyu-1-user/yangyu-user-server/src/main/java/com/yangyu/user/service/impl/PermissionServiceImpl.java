@@ -8,6 +8,7 @@ import com.yangyu.user.model.Permission;
 import com.yangyu.user.repository.PermissionRepository;
 import com.yangyu.user.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,9 +25,10 @@ public class PermissionServiceImpl implements PermissionService{
     @Autowired
     PermissionRepository permissionRepository;
 
+    @Cacheable(value = "permission", key = "#authorities")
     @Override
-    public List<Permission> selectByRole(String ...authorities) {
-        return permissionRepository.selectByRole(A.isEmpty(authorities) ? Const.ROLE_DEFAULT : authorities);
+    public List<Permission> selectByRole(Collection<String> authorities) {
+        return permissionRepository.selectByRole(authorities);
     }
 
 }

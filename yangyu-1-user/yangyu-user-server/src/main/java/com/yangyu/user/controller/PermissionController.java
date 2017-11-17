@@ -7,7 +7,10 @@ import com.yangyu.user.api.vo.PermissionVo;
 import com.yangyu.user.service.PermissionService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Collection;
 
 /**
  * Created by youz on 2017/11/9.
@@ -19,9 +22,8 @@ public class PermissionController implements PermissionServer{
     @Autowired
     PermissionService permissionService;
 
-
     @Override
-    public JsonResult authority(String[] authorities) {
+    public JsonResult authority(@RequestBody Collection<String> authorities) {
         U.assertNil(authorities,"权限不能为空");
         return JsonResult.success("菜单", PermissionVo.assemblyData(permissionService.selectByRole(authorities)));
     }

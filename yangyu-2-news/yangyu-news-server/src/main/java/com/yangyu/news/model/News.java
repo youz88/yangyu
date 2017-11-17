@@ -49,8 +49,14 @@ public class News {
     /**
      * 链接地址
      */
-    @Column(length = 100)
+    @Column(length = 150)
     private String href;
+
+    /**
+     * 头像
+     */
+    @Column(length = 150)
+    private String avatar;
 
     @Column
     private Long createId = Const.SUPER_ID;

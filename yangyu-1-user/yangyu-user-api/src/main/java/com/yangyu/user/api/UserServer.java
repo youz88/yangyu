@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @Api("用户服务API")
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/yangyu-user")
 public interface UserServer {
 
     @ApiOperation("获取用户详情")

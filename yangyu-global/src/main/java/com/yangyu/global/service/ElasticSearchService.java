@@ -38,17 +38,17 @@ import java.util.Map.Entry;
 @Component
 public class ElasticSearchService {
 
-	@Autowired
-	private ThreadPoolTaskExecutor threadPoolTaskExecutor;
+//	@Autowired
+//	private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
 	private String id;
 
 	public static TransportClient client = null;
 
-	@Value("${yangyu.elasticsearch.host}")
+	@Value("${yangyu.elasticsearch.host:localhost}")
 	private String host;
 
-	@Value("${yangyu.elasticsearch.port}")
+	@Value("${yangyu.elasticsearch.port:9300}")
 	private Integer port;
 
 	private static final SimpleDateFormat SDF_UTC = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
@@ -92,28 +92,28 @@ public class ElasticSearchService {
 		Class<?> clazz = object.getClass();
 		Field[] fields = clazz.getDeclaredFields();
 		Document document = getDocument(clazz);
-		threadPoolTaskExecutor.execute(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					XContentBuilder builder = XContentFactory.jsonBuilder().startObject();
-					for(Field field:fields) {
-						String fieldName = field.getName();
-						Method method = clazz.getDeclaredMethod("get"+fieldName.substring(0,1).toUpperCase()+fieldName.substring(1));
-						builder.field(fieldName, method.invoke(object));
-					}
-					builder.endObject();
-					String index = document.index();
-					if(index.contains("$")){
-						String dateFormat = index.substring(index.indexOf("${")+2,index.indexOf("}"));
-						index = index.substring(0,index.indexOf("$")) + DateUtil.formatDate(new Date(),dateFormat);
-					}
-					getClient().prepareIndex(index, document.type(), id).setSource(builder).get();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+//		threadPoolTaskExecutor.execute(new Runnable() {
+//			@Override
+//			public void run() {
+//				try {
+//					XContentBuilder builder = XContentFactory.jsonBuilder().startObject();
+//					for(Field field:fields) {
+//						String fieldName = field.getName();
+//						Method method = clazz.getDeclaredMethod("get"+fieldName.substring(0,1).toUpperCase()+fieldName.substring(1));
+//						builder.field(fieldName, method.invoke(object));
+//					}
+//					builder.endObject();
+//					String index = document.index();
+//					if(index.contains("$")){
+//						String dateFormat = index.substring(index.indexOf("${")+2,index.indexOf("}"));
+//						index = index.substring(0,index.indexOf("$")) + DateUtil.formatDate(new Date(),dateFormat);
+//					}
+//					getClient().prepareIndex(index, document.type(), id).setSource(builder).get();
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class ElasticSearchService {
 			}
 			SearchResponse searchResponse = getClient()
 					.prepareSearch(index)
-					.setTypes("logs")
+					.setTypes(document.type())
 					.setQuery(queryBuilder)
 					.setFrom(page.getPage())
 					.setSize(page.getLimit())

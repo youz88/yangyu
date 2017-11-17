@@ -1,5 +1,11 @@
 package com.yangyu.common;
 
+import com.google.common.collect.Lists;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 /** 项目中会用到的常量 */
 public final class Const {
 
@@ -11,7 +17,7 @@ public final class Const {
 
     public static final Long ROOT_PERMISSION = 1L;
 
-    public static final String[] ROLE_DEFAULT = new String[]{"tourist"};
+    public static final List<String> ROLE_DEFAULT = Collections.unmodifiableList(Arrays.asList("tourist"));
 
     public static final Long SUPER_ID = 0L;
 

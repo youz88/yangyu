@@ -16,5 +16,5 @@ import java.util.List;
 public interface PermissionRepository extends JpaRepository<Permission,Long>{
 
     @Query("select p from Role r,RolePermission rp ,Permission p where r.id=rp.roleId and rp.permissionId=p.id and p.isDelete=false and r.sign in (:roles) order by p.id desc")
-    List<Permission> selectByRole(@Param("roles") String ...authorities);
+    List<Permission> selectByRole(@Param("roles") Collection<String> authorities);
 }

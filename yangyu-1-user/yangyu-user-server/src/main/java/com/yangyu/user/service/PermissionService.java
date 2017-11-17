@@ -11,6 +11,6 @@ import java.util.List;
  */
 public interface PermissionService {
 
-    List<Permission> selectByRole(String[] authorities);
+    List<Permission> selectByRole(Collection<String> authorities);
 
 }
