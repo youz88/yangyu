@@ -1,13 +1,11 @@
 package com.yangyu.global.model;
 
-import com.yangyu.common.json.JsonUtil;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.io.Serializable;
 import java.util.Collection;
 
 /**
@@ -39,10 +37,14 @@ public class JwtUser extends UsernamePasswordAuthenticationToken {
         super(null,null);
     }
 
+    public JwtUser(Object principal, Object credentials){
+        super(principal,credentials);
+    }
+
     public JwtUser(Object principal, Object credentials, Collection<? extends GrantedAuthority> authorities) {
         super(principal, credentials, authorities);
-        this.authorities = getAuthorities();
-        this.authenticated = isAuthenticated();
+        this.authorities = super.getAuthorities();
+        this.authenticated = super.isAuthenticated();
     }
 
 

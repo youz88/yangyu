@@ -4,7 +4,7 @@
 truncate TABLE yangyu_user;
 INSERT INTO yangyu_user(id,real_name,nick_name,password,salt,gender,age,email,phone,is_lock,is_delete,create_id,create_date) VALUES
 (1,'Hello','超级管理员','$2a$10$Np7Diiw4T8IdGTlkvO6e1eqfbmwLtmv5EoNnyQ0i2/NOgrbUIQ/Ou','super',0,18,'123456@qq.com','13812345678',0,0,0,now()),
-(2,'World','管理员','$2a$10$Np7Diiw4T8IdGTlkvO6e1eqfbmwLtmv5EoNnyQ0i2/NOgrbUIQ/Ou','admin',0,18,'123456@qq.com','13512345678',0,0,0,now()),
+(2,'World','管理员','$2a$10$Np7Diiw4T8IdGTlkvO6e1eqfbmwLtmv5EoNnyQ0i2/NOgrbUIQ/Ou','admin',0,18,'123457@qq.com','13512345678',0,0,0,now()),
 (3,null,'游客',NULL,NULL,NULL,NULL,NULL,NULL,0,0,0,now());
 
 truncate TABLE yangyu_role;

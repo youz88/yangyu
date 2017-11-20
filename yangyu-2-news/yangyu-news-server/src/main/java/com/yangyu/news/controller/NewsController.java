@@ -38,7 +38,7 @@ public class NewsController implements NewsServer{
 
     @Override
     public JsonResult<PageInfo> list(String search,@RequestBody Page page) {
-        return JsonResult.success("资讯列表",elasticSearchService.getListBySearch(search,page,NewsVo.class,true,"contentPart","title"));
+        return JsonResult.success("资讯列表",elasticSearchService.getListBySearch(search,page,NewsVo.class,true,"content_part","title"));
     }
 
 }

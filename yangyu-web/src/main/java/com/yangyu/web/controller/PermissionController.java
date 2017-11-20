@@ -18,7 +18,7 @@ public class PermissionController {
     @Autowired
     PermissionApi permissionApi;
 
-    @PostMapping("/all")
+    @PostMapping("/authority")
     public JsonResult menu(){
         return permissionApi.authority(SpringSecurityUtil.getAuthorities());
     }

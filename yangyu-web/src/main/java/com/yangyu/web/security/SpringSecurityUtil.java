@@ -14,6 +14,9 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
 import java.util.Collection;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by youz on 2017/11/3.
@@ -31,11 +34,12 @@ public class SpringSecurityUtil {
         return JsonUtil.convert(getClaims(), JwtUser.class);
     }
 
-    public static Collection getAuthorities(){
+    public static List<String> getAuthorities(){
         String tokenHeader = RequestUtils.getRequest().getHeader(AppProperties.getByAppContext().tokenHeader);
         try {
             if(U.isNotBlank(tokenHeader)){
-                return getJwtUser().getAuthorities();
+                Collection<LinkedHashMap<String,String>> authorities = getJwtUser().getAuthorities();
+                return authorities.stream().map(linkedHashMap -> linkedHashMap.get("authority")).collect(Collectors.toList());
             }
         }catch (Exception e){
             LogUtil.ROOT_LOG.error("解析JWT失败",e);

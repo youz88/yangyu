@@ -43,9 +43,12 @@ class News:
             contentPart = item[1]
             if len(contentPart) > 250:
                 contentPart = str(contentPart).decode("utf-8")[:250].encode("utf-8") + '...'
+            href = item[5]
+            if str(href).startswith("/"):
+                href = "https://www.oschina.net" + href
             #拼接json字符串
             contents.append('{"title":"'+item[0]+'","contentPart":"'+contentPart+'","avatar":"'+item[2]+
-                            '","author":"'+item[3]+'","publishDate":"'+str(item[4]).strip()+'","href":"'+item[5]+'"}')
+                            '","author":"'+item[3]+'","publishDate":"'+str(item[4]).strip()+'","href":"'+href+'"}')
         return contents
 
     def start(self):

@@ -17,7 +17,7 @@ public class Page implements Serializable {
     /** 分页默认页 */
     public static final int DEFAULT_PAGE_NO = 1;
     /** 分页默认的每页条数 */
-    public static final int DEFAULT_LIMIT = 15;
+    public static final int DEFAULT_LIMIT = 10;
     /** 前台传递过来的分页参数名 */
     public static final String GLOBAL_PAGE = "page";
     /** 前台传递过来的每页条数名 */

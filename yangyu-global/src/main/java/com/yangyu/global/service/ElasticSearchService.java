@@ -144,7 +144,7 @@ public class ElasticSearchService {
 					.prepareSearch(index)
 					.setTypes(document.type())
 					.setQuery(queryBuilder)
-					.setFrom(page.getPage())
+					.setFrom((page.getPage()-1) * page.getLimit())
 					.setSize(page.getLimit())
 					.highlighter(showHigh ? getHighlight(searchField) : null)
 					.execute()

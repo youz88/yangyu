@@ -41,11 +41,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         try {
             LoginDto user = new ObjectMapper().readValue(req.getInputStream(), LoginDto.class);
             return authenticationManager.authenticate(
-                    new JwtUser(
-                            user.getUsername(),
-                            user.getPassword(),
-                            new ArrayList<>())
-            );
+                    new JwtUser(user.getUsername(), user.getPassword()));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

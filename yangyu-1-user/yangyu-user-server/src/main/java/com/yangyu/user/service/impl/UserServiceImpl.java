@@ -1,5 +1,7 @@
 package com.yangyu.user.service.impl;
 
+import com.yangyu.common.Const;
+import com.yangyu.common.date.DateUtil;
 import com.yangyu.common.util.U;
 import com.yangyu.user.model.User;
 import com.yangyu.user.repository.UserRepository;
@@ -34,6 +36,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(User user) {
+        userRepository.save(user);
+    }
+
+    @Override
+    public void register(User user) {
+        user.setCreateDate(DateUtil.now().getTime())
+                .setCreateId(Const.SUPER_ID);
         userRepository.save(user);
     }
 }

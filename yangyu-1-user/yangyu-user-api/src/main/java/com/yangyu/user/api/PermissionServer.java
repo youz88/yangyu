@@ -21,5 +21,5 @@ public interface PermissionServer {
 
     @ApiOperation("查询用户拥有的菜单权限")
     @PostMapping("/authority")
-    JsonResult authority(@RequestBody Collection<String> authorities);
+    JsonResult authority(@RequestBody List<String> authorities);
 }

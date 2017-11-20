@@ -2,6 +2,7 @@ package com.yangyu.user.api.dto;
 
 import io.swagger.annotations.ApiParam;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
@@ -9,6 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@NoArgsConstructor
 public class LoginDto {
 
     @ApiParam("电话")

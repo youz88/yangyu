@@ -19,6 +19,7 @@ public final class Const {
 
     public static final List<String> ROLE_DEFAULT = Collections.unmodifiableList(Arrays.asList("tourist"));
 
+    /** 系统创建ID为0 */
     public static final Long SUPER_ID = 0L;
 
     public static final String NEWS_HREF = "yangyu-2-news-href";

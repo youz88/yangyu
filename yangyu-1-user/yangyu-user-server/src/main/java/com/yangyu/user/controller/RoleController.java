@@ -6,6 +6,7 @@ import com.yangyu.user.api.vo.RoleVo;
 import com.yangyu.user.service.RoleService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class RoleController implements RoleServer{
     RoleService roleService;
 
     @Override
-    public List<RoleVo> selectByUser(Long id) {
+    public List<RoleVo> selectByUser(@PathVariable("id") Long id) {
         return JsonUtil.convertList(roleService.selectByUser(id),RoleVo.class);
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by youz on 2017/11/9.
@@ -23,7 +24,7 @@ public class PermissionController implements PermissionServer{
     PermissionService permissionService;
 
     @Override
-    public JsonResult authority(@RequestBody Collection<String> authorities) {
+    public JsonResult authority(@RequestBody List<String> authorities) {
         U.assertNil(authorities,"权限不能为空");
         return JsonResult.success("菜单", PermissionVo.assemblyData(permissionService.selectByRole(authorities)));
     }
