@@ -3,11 +3,13 @@
 
 ####docker ELK启动
 
-- 设置docker 
+- 运行ElasticSearch需设置docker 
     - 1.vi /etc/sysctl.conf
     - 2.vm.max_map_count=655360
     - 3.sysctl -p
-
+- docker容器中安装vi命令
+    - apt-get update
+    - apt-get install vim
 - elasticsearch(5.4.0): 
     ``` 
     docker run --name=elasticsearch -p 9200:9200 -p 9300:9300 -v /usr/elk-config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v /usr/elk-config/jvm.options:/etc/elasticsearch/jvm.options -d XXX
@@ -48,6 +50,20 @@
          index => "yangyu-news-%{+YYYY.MM.dd}"
        }        
      }
-- docker容器中安装vi命令
-    - apt-get update
-    - apt-get install vim
+- zookeeper(3.4.9)
+    ```
+    docker run -d --name zookeeper -p 2181:2181 XXX
+    ```
+- kafka(0.9.0.1)
+    ```
+    docker run -d --name kafka -p 9092:9092 --link zookeeper -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 -e KAFKA_ADVERTISED_HOST_NAME=localhost -e KAFKA_ADVERTISED_PORT=9092 XXX
+    1.创建一个 topic 名称为 test
+        bin/kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic test
+    2.查看当前的 topic 列表
+        bin/kafka-topics.sh --list --zookeeper zookeeper:2181
+    3.运行一个消息生产者，指定 topic 为刚刚创建的 test 
+        bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+    4.运行一个消息消费者，同样指定 topic 为 test
+        bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --zookeeper:2181 --topic test --from-beginning
+
+    ```

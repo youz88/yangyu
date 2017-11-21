@@ -60,4 +60,14 @@
 		</dependency>
 	</dependencies>
 
+	<build>
+		<finalName>yangyu-2-news-8020</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
 </project>

@@ -1,10 +1,10 @@
 package com.yangyu.user.api.dto;
 
-import com.yangyu.common.json.JsonUtil;
 import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.http.HttpEntity;
 
 /**
  * Created by youz on 2017/11/20.
@@ -27,6 +27,6 @@ public class RegisterDto {
     private String phone;
 
     @ApiParam("验证码")
-    private String emailVcode;
+    private String captcha;
 
 }

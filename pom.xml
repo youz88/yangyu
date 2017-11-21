@@ -13,8 +13,11 @@
 
 	<modules>
 		<module>yangyu-0-study</module>
+
 		<module>yangyu-common</module>
 		<module>yangyu-global</module>
+
+		<module>yangyu-message</module>
 		<module>yangyu-task</module>
 		<module>yangyu-web</module>
 		<module>yangyu-0-config</module>

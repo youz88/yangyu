@@ -21,6 +21,9 @@
 		<module>yangyu-study-hystrix-dashboard</module>
 		<module>yangyu-study-feign</module>
 		<module>yangyu-study-zuul</module>
+
+		<module>yangyu-study-stream-provider</module>
+		<module>yangyu-study-stream-consumer</module>
 	</modules>
 
 	<parent>
