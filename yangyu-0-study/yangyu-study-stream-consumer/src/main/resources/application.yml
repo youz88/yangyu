@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: yangyu-study-stream-consumer
+  cloud:
+     instance-count: 1
+     instance-index: 0
+     stream:
+        kafka:
+          binder:
+            brokers: 192.168.99.100:9092
+            zk-nodes: 192.168.99.100:2181
+            auto-add-partitions: true
+            auto-create-topics: true
+            min-partition-count: 1
+        bindings:
+          input:
+            destination: event-demo
+            group: s1
+            consumer:
+              autoCommitOffset: false
+              concurrency: 1
+              partitioned: false
+server:
+  port: 8082
