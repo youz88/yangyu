@@ -1,15 +1,13 @@
 package com.yangyu.web.security;
 
-import com.yangyu.api.ConfigApi;
 import com.yangyu.common.Const;
 import com.yangyu.common.json.JsonUtil;
 import com.yangyu.common.util.ApplicationContextUtil;
 import com.yangyu.common.util.LogUtil;
 import com.yangyu.common.util.RequestUtils;
 import com.yangyu.common.util.U;
-import com.yangyu.global.AppProperties;
-import com.yangyu.global.enums.ConfigType;
 import com.yangyu.global.model.JwtUser;
+import com.yangyu.web.constant.Config;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
@@ -24,9 +22,10 @@ import java.util.stream.Collectors;
 public class SpringSecurityUtil {
 
     public static Claims getClaims() {
+        Config config = ApplicationContextUtil.getBean(Config.class);
         return Jwts.parser()
-                .setSigningKey(ApplicationContextUtil.getBean(ConfigApi.class).getValue(ConfigType.JWT_SECRET))
-                .parseClaimsJws(RequestUtils.getRequest().getHeader(AppProperties.getByAppContext().tokenHeader).replace(AppProperties.getByAppContext().tokenPrefix, "").trim())
+                .setSigningKey(config.jwtSecretKey)
+                .parseClaimsJws(RequestUtils.getRequest().getHeader(config.tokenHeader).replace(config.tokenPrefix, "").trim())
                 .getBody();
     }
 
@@ -35,7 +34,7 @@ public class SpringSecurityUtil {
     }
 
     public static List<String> getAuthorities(){
-        String tokenHeader = RequestUtils.getRequest().getHeader(AppProperties.getByAppContext().tokenHeader);
+        String tokenHeader = RequestUtils.getRequest().getHeader(ApplicationContextUtil.getBean(Config.class).tokenHeader);
         try {
             if(U.isNotBlank(tokenHeader)){
                 Collection<LinkedHashMap<String,String>> authorities = getJwtUser().getAuthorities();

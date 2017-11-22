@@ -1,19 +1,17 @@
 server:
   port: 8008
 spring:
-  application:
-    name: yangyu-0-config
-  datasource:
-    url: jdbc:mysql://192.168.99.100:3306/yangyu
-    driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password: root
-    data: classpath:data.sql
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+  profiles:
+      active: dev
+  cloud:
+      config:
+        server:
+          native:
+            search-locations: file:///D:/java/idea_workspace/yangyu/yangyu-0-config/src/main/resources/config #配置文件根目录
+security: #加密配置
+  user:
+    name: config
+    password: admin
+management:
+  security:
+    enabled: false

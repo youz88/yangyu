@@ -1,10 +1,11 @@
 package com.yangyu.web.filter;
 
 import com.yangyu.common.util.U;
-import com.yangyu.global.AppProperties;
 import com.yangyu.global.model.JwtUser;
+import com.yangyu.web.constant.Config;
 import com.yangyu.web.security.SpringSecurityUtil;
 import io.jsonwebtoken.ExpiredJwtException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
@@ -21,6 +22,8 @@ import java.util.ArrayList;
  */
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter{
 
+    @Autowired
+    Config config;
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
@@ -28,9 +31,9 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter{
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String header = request.getHeader(AppProperties.getByAppContext().tokenHeader);
+        String header = request.getHeader(config.tokenHeader);
 
-        if (header == null || !header.startsWith(AppProperties.getByAppContext().tokenPrefix)) {
+        if (header == null || !header.startsWith(config.tokenPrefix)) {
             chain.doFilter(request, response);
             return;
         }
@@ -43,7 +46,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter{
     }
 
     private JwtUser getAuthentication(HttpServletRequest request) {
-        String token = request.getHeader(AppProperties.getByAppContext().tokenHeader);
+        String token = request.getHeader(config.tokenHeader);
         if (token != null) {
             try {
                 String userName = SpringSecurityUtil.getClaims().getSubject();

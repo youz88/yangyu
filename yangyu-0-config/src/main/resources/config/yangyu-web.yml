@@ -1,0 +1,6 @@
+jwt:
+  expirationTime: 86400000
+  tokenHeader: Authorization
+  tokenPrefix: Bearer
+  secret:
+    key: admin

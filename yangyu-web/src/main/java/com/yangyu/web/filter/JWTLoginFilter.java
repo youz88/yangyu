@@ -1,15 +1,13 @@
 package com.yangyu.web.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.yangyu.api.ConfigApi;
 import com.yangyu.common.json.JsonUtil;
-import com.yangyu.common.util.ApplicationContextUtil;
-import com.yangyu.global.AppProperties;
-import com.yangyu.global.enums.ConfigType;
 import com.yangyu.global.model.JwtUser;
+import com.yangyu.web.constant.Config;
 import com.yangyu.web.dto.LoginDto;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -19,7 +17,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
 
@@ -28,6 +25,8 @@ import java.util.Map;
  */
 public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
+    @Autowired
+    Config config;
 
     private AuthenticationManager authenticationManager;
 
@@ -53,14 +52,10 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         String token = Jwts.builder()
                 .addClaims(JsonUtil.convert((JwtUser)auth, Map.class))
                 .setSubject(auth.getPrincipal().toString())
-                .setExpiration(new Date(System.currentTimeMillis() + AppProperties.getByAppContext().expirationTime))
-                .signWith(SignatureAlgorithm.HS512, getSecretKey())
+                .setExpiration(new Date(System.currentTimeMillis() + config.expirationTime))
+                .signWith(SignatureAlgorithm.HS512, config.jwtSecretKey)
                 .compact();
-        res.addHeader(AppProperties.getByAppContext().tokenHeader, AppProperties.getByAppContext().tokenPrefix + " " + token);
+        res.addHeader(config.tokenHeader, config.tokenPrefix + " " + token);
     }
 
-    public String getSecretKey() {
-        ConfigApi bean = ApplicationContextUtil.getBean(ConfigApi.class);
-        return bean.getValue(ConfigType.JWT_SECRET);
-    }
 }

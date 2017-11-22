@@ -1,5 +1,7 @@
 package com.yangyu.user.api.dto;
 
+import com.yangyu.common.json.JsonUtil;
+import com.yangyu.user.model.User;
 import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,5 +30,9 @@ public class RegisterDto {
 
     @ApiParam("验证码")
     private String captcha;
+
+    public User currentData(){
+        return JsonUtil.convert(this,User.class);
+    }
 
 }

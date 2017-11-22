@@ -1,7 +1,6 @@
 package com.yangyu.news.model;
 
 import com.yangyu.common.Const;
-import com.yangyu.common.annotation.Document;
 import lombok.Getter;
 import lombok.Setter;
 

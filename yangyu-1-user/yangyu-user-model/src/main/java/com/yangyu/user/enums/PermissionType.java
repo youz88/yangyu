@@ -1,8 +1,6 @@
 package com.yangyu.user.enums;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 
 /**
  * Created by youz on 2017/11/8.

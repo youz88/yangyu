@@ -4,12 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yangyu</groupId>
-	<artifactId>yangyu-news-api</artifactId>
+	<artifactId>yangyu-news-model</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>yangyu-news-api</name>
-	<description>资讯服务API接口</description>
+	<description>资讯模块实体</description>
 
 	<parent>
 		<groupId>com.yangyu</groupId>
@@ -18,30 +17,22 @@
 	</parent>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>com.yangyu</groupId>
 			<artifactId>yangyu-common</artifactId>
 			<scope>provided</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.yangyu</groupId>
-			<artifactId>yangyu-news-model</artifactId>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<scope>provided</scope>
-		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-			<scope>provided</scope>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 </project>

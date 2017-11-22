@@ -17,6 +17,7 @@
 	</parent>
 
 	<modules>
+		<module>yangyu-news-model</module>
 		<module>yangyu-news-api</module>
 		<module>yangyu-news-server</module>
 	</modules>

@@ -26,6 +26,10 @@
 			<groupId>com.yangyu</groupId>
 			<artifactId>yangyu-news-api</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.yangyu</groupId>
+			<artifactId>yangyu-news-model</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

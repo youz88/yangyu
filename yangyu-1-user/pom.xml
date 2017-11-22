@@ -18,6 +18,7 @@
 	</parent>
 
 	<modules>
+		<module>yangyu-user-model</module>
 		<module>yangyu-user-api</module>
 		<module>yangyu-user-server</module>
 	</modules>
