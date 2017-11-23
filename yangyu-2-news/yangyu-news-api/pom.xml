@@ -27,7 +27,6 @@
 		<dependency>
 			<groupId>com.yangyu</groupId>
 			<artifactId>yangyu-news-model</artifactId>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>

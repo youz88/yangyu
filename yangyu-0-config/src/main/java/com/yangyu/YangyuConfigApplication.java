@@ -8,9 +8,9 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 @SpringBootApplication
 @EnableConfigServer
 @EnableDiscoveryClient
-public class Yangyu0ConfigApplication {
+public class YangyuConfigApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Yangyu0ConfigApplication.class, args);
+		SpringApplication.run(YangyuConfigApplication.class, args);
 	}
 }

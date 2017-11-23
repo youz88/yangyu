@@ -25,7 +25,6 @@
 		<dependency>
 			<groupId>com.yangyu</groupId>
 			<artifactId>yangyu-user-model</artifactId>
-			<scope>provided</scope>
 		</dependency>
 
 		<dependency>

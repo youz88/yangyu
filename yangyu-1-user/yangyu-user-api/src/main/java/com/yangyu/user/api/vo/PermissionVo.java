@@ -43,6 +43,9 @@ public class PermissionVo {
     @ApiModelProperty("链接路径")
     private String url;
 
+    @ApiModelProperty("组件")
+    private String component;
+
     @ApiModelProperty("图标")
     private String icon;
 

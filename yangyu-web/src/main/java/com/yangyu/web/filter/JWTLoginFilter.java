@@ -2,6 +2,7 @@ package com.yangyu.web.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yangyu.common.json.JsonUtil;
+import com.yangyu.common.util.ApplicationContextUtil;
 import com.yangyu.global.model.JwtUser;
 import com.yangyu.web.constant.Config;
 import com.yangyu.web.dto.LoginDto;
@@ -25,9 +26,6 @@ import java.util.Map;
  */
 public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
-    @Autowired
-    Config config;
-
     private AuthenticationManager authenticationManager;
 
     public JWTLoginFilter(AuthenticationManager authenticationManager) {
@@ -49,13 +47,14 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
     // 用户成功登录后，这个方法会被调用，我们在这个方法里生成token
     @Override
     protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain, Authentication auth) {
+        Config config = ApplicationContextUtil.getBean(Config.class);
         String token = Jwts.builder()
                 .addClaims(JsonUtil.convert((JwtUser)auth, Map.class))
                 .setSubject(auth.getPrincipal().toString())
-                .setExpiration(new Date(System.currentTimeMillis() + config.expirationTime))
-                .signWith(SignatureAlgorithm.HS512, config.jwtSecretKey)
+                .setExpiration(new Date(System.currentTimeMillis() + config.getExpirationTime()))
+                .signWith(SignatureAlgorithm.HS512, config.getJwtSecretKey())
                 .compact();
-        res.addHeader(config.tokenHeader, config.tokenPrefix + " " + token);
+        res.addHeader(config.getTokenHeader(), config.getTokenPrefix() + " " + token);
     }
 
 }

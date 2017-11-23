@@ -1,3 +1,10 @@
+eureka:
+  instance:
+    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
+    lease-renewal-interval-in-seconds: 2 #契约更新间隔
+    lease-expiration-duration-in-seconds: 4 #契约过期时间
+    preferIpAddress: true
+
 server:
   port: 8021
 
@@ -13,11 +20,6 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
 
 yangyu:
   elasticsearch:

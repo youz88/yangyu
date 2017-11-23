@@ -15,8 +15,10 @@ public final class Const {
     /** cors 支持的所有方法 */
     public static final String[] SUPPORT_METHODS = new String[] { "HEAD", "GET", "POST", "PUT", "DELETE", "OPTIONS" };
 
+    /** 根菜单ID */
     public static final Long ROOT_PERMISSION = 1L;
 
+    /** 默认游客角色 */
     public static final List<String> ROLE_DEFAULT = Collections.unmodifiableList(Arrays.asList("tourist"));
 
     /** 系统创建ID为0 */

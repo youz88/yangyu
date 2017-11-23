@@ -1,0 +1,22 @@
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  application:
+    name: yangyu-web
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: yangyu-0-config
+      fail-fast: true # 如果连接配置中心出错,则中断程序
+      username: config
+      password: admin
+      profile: default  #指定加载配置文件profile
+
+management:
+  security:
+    enabled: false
+

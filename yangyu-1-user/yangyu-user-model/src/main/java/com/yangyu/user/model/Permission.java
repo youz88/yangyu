@@ -45,6 +45,10 @@ public class Permission implements Serializable {
     @Column(length = 100)
     private String url;
 
+    /** 组件名称 */
+    @Column(length = 50)
+    private String component;
+
     /** 图标 */
     @Column(length = 20)
     private String icon;

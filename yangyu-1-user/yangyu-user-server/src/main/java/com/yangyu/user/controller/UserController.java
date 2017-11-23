@@ -1,16 +1,12 @@
 package com.yangyu.user.controller;
 
 import com.yangyu.common.json.JsonResult;
-import com.yangyu.common.json.JsonUtil;
-import com.yangyu.global.model.JwtUser;
 import com.yangyu.user.api.UserServer;
 import com.yangyu.user.api.dto.RegisterDto;
 import com.yangyu.user.api.vo.UserInfoVo;
-import com.yangyu.user.model.User;
 import com.yangyu.user.service.UserService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,7 +27,7 @@ public class UserController implements UserServer {
 
     @Override
     public UserInfoVo selectByName(String userName) {
-        return JsonUtil.convert(userService.selectByName(userName),UserInfoVo.class);
+        return UserInfoVo.assemblyData(userService.selectByName(userName));
     }
 
     @Override
@@ -39,4 +35,5 @@ public class UserController implements UserServer {
         userService.register(registerDto.currentData());
         return JsonResult.success("注册成功");
     }
+
 }

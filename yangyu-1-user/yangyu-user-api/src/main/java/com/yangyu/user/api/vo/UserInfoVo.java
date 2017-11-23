@@ -1,6 +1,7 @@
 package com.yangyu.user.api.vo;
 
 import com.yangyu.common.json.JsonUtil;
+import com.yangyu.user.model.User;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,12 +33,17 @@ public class UserInfoVo {
     @ApiModelProperty("是否已锁定")
     private Boolean isLock;
 
-    public static UserInfoVo assemblyData(Object user){
+    public static UserInfoVo assemblyData(User user){
         return JsonUtil.convert(user,UserInfoVo.class);
     }
 
     public static UserInfoVo defaultUser() {
         //TODO 设置默认用户
         return null;
+    }
+
+    /** 供JwtUser转换 */
+    public static UserInfoVo assemblyJwtData(Object user){
+        return JsonUtil.convert(user,UserInfoVo.class);
     }
 }

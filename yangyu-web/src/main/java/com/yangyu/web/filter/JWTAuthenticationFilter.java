@@ -1,14 +1,18 @@
 package com.yangyu.web.filter;
 
+import com.yangyu.common.util.ApplicationContextUtil;
+import com.yangyu.common.util.LogUtil;
 import com.yangyu.common.util.U;
 import com.yangyu.global.model.JwtUser;
 import com.yangyu.web.constant.Config;
 import com.yangyu.web.security.SpringSecurityUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -22,18 +26,16 @@ import java.util.ArrayList;
  */
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter{
 
-    @Autowired
-    Config config;
-
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String header = request.getHeader(config.tokenHeader);
+        Config config = ApplicationContextUtil.getBean(Config.class);
+        String header = request.getHeader(config.getTokenHeader());
 
-        if (header == null || !header.startsWith(config.tokenPrefix)) {
+        if (header == null || !header.startsWith(config.getTokenPrefix())) {
             chain.doFilter(request, response);
             return;
         }
@@ -46,7 +48,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter{
     }
 
     private JwtUser getAuthentication(HttpServletRequest request) {
-        String token = request.getHeader(config.tokenHeader);
+        String token = request.getHeader(ApplicationContextUtil.getBean(Config.class).getTokenHeader());
         if (token != null) {
             try {
                 String userName = SpringSecurityUtil.getClaims().getSubject();
@@ -56,6 +58,7 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter{
             }catch (ExpiredJwtException e){
                 U.assertException(true,"token已经过期,请重新获取");
             }catch (Exception e){
+                LogUtil.ROOT_LOG.error("JWT验签失败",e);
                 U.assertException(true,"JWT签名不匹配");
             }
             return null;

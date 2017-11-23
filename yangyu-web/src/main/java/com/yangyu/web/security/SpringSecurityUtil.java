@@ -24,8 +24,8 @@ public class SpringSecurityUtil {
     public static Claims getClaims() {
         Config config = ApplicationContextUtil.getBean(Config.class);
         return Jwts.parser()
-                .setSigningKey(config.jwtSecretKey)
-                .parseClaimsJws(RequestUtils.getRequest().getHeader(config.tokenHeader).replace(config.tokenPrefix, "").trim())
+                .setSigningKey(config.getJwtSecretKey())
+                .parseClaimsJws(RequestUtils.getRequest().getHeader(config.getTokenHeader()).replace(config.getTokenPrefix(), "").trim())
                 .getBody();
     }
 
@@ -34,7 +34,7 @@ public class SpringSecurityUtil {
     }
 
     public static List<String> getAuthorities(){
-        String tokenHeader = RequestUtils.getRequest().getHeader(ApplicationContextUtil.getBean(Config.class).tokenHeader);
+        String tokenHeader = RequestUtils.getRequest().getHeader(ApplicationContextUtil.getBean(Config.class).getTokenHeader());
         try {
             if(U.isNotBlank(tokenHeader)){
                 Collection<LinkedHashMap<String,String>> authorities = getJwtUser().getAuthorities();
