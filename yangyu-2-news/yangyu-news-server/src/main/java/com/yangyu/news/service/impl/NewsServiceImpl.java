@@ -21,4 +21,9 @@ public class NewsServiceImpl implements NewsService{
     public void save(List<News> list) {
         newsRepository.save(list);
     }
+
+    @Override
+    public void delete(List<Long> ids) {
+
+    }
 }

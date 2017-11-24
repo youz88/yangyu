@@ -4,6 +4,7 @@ import com.yangyu.common.json.JsonResult;
 import com.yangyu.common.json.JsonUtil;
 import com.yangyu.common.page.Page;
 import com.yangyu.common.page.PageInfo;
+import com.yangyu.news.api.dto.NewsListQueryDto;
 import com.yangyu.news.api.vo.NewsVo;
 import com.yangyu.global.service.ElasticSearchService;
 import com.yangyu.news.api.NewsServer;
@@ -38,7 +39,20 @@ public class NewsController implements NewsServer{
 
     @Override
     public JsonResult<PageInfo> list(String search,@RequestBody Page page) {
-        return JsonResult.success("资讯列表",elasticSearchService.getListBySearch(search,page,NewsVo.class,true,"content_part","title"));
+        PageInfo listBySearch = elasticSearchService.getPageInfoBySearch(search, page, NewsVo.class, true, "content_part", "title");
+        return JsonResult.success("资讯列表", listBySearch);
+    }
+
+    @Override
+    public JsonResult<PageInfo> manageList(@RequestBody NewsListQueryDto newsListQueryDto,@RequestBody Page page) {
+
+        return null;
+    }
+
+    @Override
+    public JsonResult manageDel(@RequestBody List<Long> id) {
+        newsService.delete(id);
+        return JsonResult.success("删除成功");
     }
 
 }

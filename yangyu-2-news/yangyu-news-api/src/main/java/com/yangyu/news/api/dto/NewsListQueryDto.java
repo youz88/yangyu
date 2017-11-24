@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Created by youz on 2017/11/13.
- * 新增资讯
+ * Created by youz on 2017/11/24.
+ * 后台资讯列表查询
  */
 @Getter
 @Setter
 @NoArgsConstructor
-public class NewsSaveDto {
+public class NewsListQueryDto {
 
     @ApiParam("标题")
     private String title;
@@ -20,16 +20,7 @@ public class NewsSaveDto {
     @ApiParam("作者")
     private String author;
 
-    @ApiParam("部分内容")
-    private String contentPart;
-
     @ApiParam("发表时间")
     private String publishDate;
-
-    @ApiParam("链接地址")
-    private String href;
-
-    @ApiParam("头像")
-    private String avatar;
 
 }

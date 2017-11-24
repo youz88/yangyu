@@ -2,7 +2,6 @@ package com.yangyu.api;
 
 import com.yangyu.fallback.INewsFallback;
 import com.yangyu.news.api.NewsServer;
-import com.yangyu.news.api.dto.NewsSaveDtoList;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.cloud.netflix.ribbon.RibbonClient;

@@ -3,7 +3,9 @@ package com.yangyu.news.api;
 import com.yangyu.common.json.JsonResult;
 import com.yangyu.common.page.Page;
 import com.yangyu.common.page.PageInfo;
+import com.yangyu.news.api.dto.NewsListQueryDto;
 import com.yangyu.news.api.dto.NewsSaveDto;
+import com.yangyu.news.api.vo.NewsVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -24,4 +26,14 @@ public interface NewsServer {
     @ApiOperation("资讯信息列表")
     @PostMapping("/list")
     JsonResult<PageInfo> list(@RequestParam("search") String search, @RequestBody Page page);
+
+
+
+    @ApiOperation("后台资讯列表")
+    @PostMapping("/manage/list")
+    JsonResult<PageInfo> manageList(@RequestBody NewsListQueryDto newsListQueryDto, @RequestBody Page page);
+
+    @ApiOperation("后台资讯列表")
+    @PostMapping("/manage/del")
+    JsonResult manageDel(@RequestBody List<Long> id);
 }

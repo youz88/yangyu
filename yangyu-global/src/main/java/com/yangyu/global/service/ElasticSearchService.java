@@ -125,7 +125,7 @@ public class ElasticSearchService {
 	 * @param searchField    搜索字段
 	 * @return
 	 */
-	public PageInfo getListBySearch(String search, Page page, Class<?> clazz, Boolean showHigh, String... searchField){
+	public PageInfo getPageInfoBySearch(String search, Page page, Class<?> clazz, Boolean showHigh, String... searchField){
 		Document document = getDocument(clazz);
 		List list = new ArrayList();
 		long total = 0;
