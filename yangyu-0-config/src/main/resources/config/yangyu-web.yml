@@ -10,7 +10,7 @@ server:
 
 feign:
   hystrix:
-    enabled: true
+    enabled: false
 
 security:
   basic:

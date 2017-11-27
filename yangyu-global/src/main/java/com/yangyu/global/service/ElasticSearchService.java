@@ -13,11 +13,14 @@ import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.common.xcontent.XContentBuilder;
 import org.elasticsearch.common.xcontent.XContentFactory;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
+import org.elasticsearch.search.sort.SortBuilders;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,9 +28,11 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -120,7 +125,7 @@ public class ElasticSearchService {
 	 * 搜索
 	 * @param search    关键词
 	 * @param page    分页参数
-  	 * @param clazz    数据类型
+  	 * @param clazz    返回数据类型
 	 * @param showHigh    是否高亮
 	 * @param searchField    搜索字段
 	 * @return
@@ -131,10 +136,8 @@ public class ElasticSearchService {
 		long total = 0;
 		try {
 			MultiMatchQueryBuilder queryBuilder = null;
-			Class<?> forName = Class.forName(clazz.getName());
 			if (U.isNotBlank(search)) {
 				queryBuilder = QueryBuilders.multiMatchQuery(search, searchField);
-
 			}
 			String index = document.index();
 			if(index.contains("$")){
@@ -149,54 +152,13 @@ public class ElasticSearchService {
 					.highlighter(showHigh ? getHighlight(searchField) : null)
 					.execute()
 					.actionGet();
-//			page.setTotalPage(searchResponse.getHits().getTotalHits() % pageSize == 0 ? searchResponse.getHits().getTotalHits() / pageSize : searchResponse.getHits().getTotalHits() / pageSize + 1);
 			total = searchResponse.getHits().getTotalHits();
 			//设置高亮字段
 			for (SearchHit hit : searchResponse.getHits()) {
-				Object newInstance = forName.newInstance();
-				Map<String, Object> source = hit.getSource();
-				if(showHigh) {
-					Map<String, HighlightField> result = hit.getHighlightFields();
-					for(Entry<String, Object> entry:source.entrySet()) {
-						if(entry.getKey().startsWith("@")) continue;//Kibana自动创建了[@version、@timestamp]
-						Class<?> fieldType = clazz.getDeclaredField(entry.getKey()).getType();
-						Method method = forName.getDeclaredMethod(
-								"set"+entry.getKey().substring(0,1).toUpperCase()+entry.getKey().substring(1), fieldType);
-						HighlightField highField = result.get(entry.getKey());
-						if (highField !=null) {
-							String html = "";
-		                    // 取得定义的高亮标签
-		                    Text[] titleTexts = highField.fragments();
-		                    // 为title串值增加自定义的高亮标签
-		                    for (Text text : titleTexts) {
-		                    	html += text;
-		                    }
-		                    method.invoke(newInstance, html);
-		                }else {
-		                	if(fieldType.getSimpleName().equalsIgnoreCase("Date")) {
-		                		method.invoke(newInstance, ElasticSearchService.SDF_UTC.parse(entry.getValue()+""));
-		                	}else {
-		                		method.invoke(newInstance, entry.getValue());
-		                	}
-		                }
-					};
-				}else {
-					for(Entry<String, Object> entry:source.entrySet()) {
-						Class<?> fieldType = clazz.getDeclaredField(entry.getKey()).getType();
-						Method method = forName.getDeclaredMethod(
-								"set"+entry.getKey().substring(0,1).toUpperCase()+entry.getKey().substring(1), fieldType);
-						if(fieldType.getSimpleName().equalsIgnoreCase("Date")) {
-	                		method.invoke(newInstance, ElasticSearchService.SDF_UTC.parse(entry.getValue()+""));
-	                	}else {
-	                		method.invoke(newInstance, entry.getValue());
-	                	}
-					}
-				}
+				Object newInstance = assemblyClazz(hit,clazz,showHigh);
 				list.add(newInstance);
 				newInstance = null;
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
 		}finally {
 //			ElasticSearchUtil.close();
 		}
@@ -224,31 +186,121 @@ public class ElasticSearchService {
 				.actionGet();
 		if(response.getHits().totalHits == 1) {
 			SearchHit at = response.getHits().getAt(0);
-			Map<String, Object> source = at.getSource();
-			try {
-				Class<?> forName = Class.forName(clazz.getName());
-				newInstance = forName.newInstance();
-				for(Entry<String, Object> entry:source.entrySet()) {
-					Class<?> fieldType = clazz.getDeclaredField(entry.getKey()).getType();
-					Method method = forName.getDeclaredMethod(
-							"set"+entry.getKey().substring(0,1).toUpperCase()+entry.getKey().substring(1), fieldType);
-					if(fieldType.getSimpleName().equalsIgnoreCase("Date")) {
-		        		method.invoke(newInstance, ElasticSearchService.SDF_UTC.parse(entry.getValue()+""));
-		        	}else {
-		        		method.invoke(newInstance, entry.getValue());
-		        	}
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			newInstance = assemblyClazz(at,clazz,false);
 		}
 		return newInstance;
 	}
 
-	public Document getDocument(Class<?> clazz){
+	/**
+	 * 后台管理查询（根据所传对象的属性值全匹配）
+	 * @param objectParam	查询的对象
+	 * @param page	分页参数
+	 * @param clazz	返回数据类型
+	 * @return
+	 */
+	public PageInfo getPageInfoByManage(Object objectParam, Integer page, Integer limit, Class<?> clazz) {
+		Document document = getDocument(clazz);
+		List list = new ArrayList();
+		long total = 0;
+		String index = document.index();
+		if (index.contains("$")) {
+			index = index.substring(0, index.indexOf("$")) + "*";
+		}
+		SearchResponse searchResponse = getClient()
+				.prepareSearch(index)
+				.setTypes(document.type())
+				.setQuery(assemblyQueryBuilder(objectParam))
+				.setFrom((page - 1) * limit)
+				.setSize(limit)
+				.addSort(SortBuilders.fieldSort("@timestamp"))//根据创建时间排序
+				.execute()
+				.actionGet();
+		total = searchResponse.getHits().getTotalHits();
+		for (SearchHit hit : searchResponse.getHits()) {
+			list.add(assemblyClazz(hit,clazz,false));
+		}
+		return new PageInfo(total,list);
+	}
+
+	private Document getDocument(Class<?> clazz){
 		Document document = clazz.getAnnotation(Document.class);
 		U.assertNil(document,clazz+"异常,未找到@Document标识");
 		return document;
+	}
+
+	private QueryBuilder assemblyQueryBuilder(Object objectParam){
+		Class<?> paramClass = objectParam.getClass();
+		Field[] declaredFields = paramClass.getDeclaredFields();
+		BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
+		for(Field field:declaredFields){
+			try {
+				Method declaredMethod = paramClass.getDeclaredMethod("get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
+				Object invoke = declaredMethod.invoke(objectParam);
+				if(U.isNotBlank(invoke)){
+					queryBuilder.must(QueryBuilders.termQuery(field.getName(),invoke.toString()));
+				}
+			} catch (NoSuchMethodException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} catch (InvocationTargetException e) {
+				e.printStackTrace();
+			}
+		}
+		return queryBuilder;
+	}
+
+	private Object assemblyClazz(SearchHit hit, Class<?> clazz, Boolean showHigh)  {
+		Object newInstance = null;
+		try {
+			newInstance = clazz.newInstance();
+			Map<String, Object> source = hit.getSource();
+			for(Entry<String, Object> entry:source.entrySet()) {
+				if(entry.getKey().startsWith("@")) continue;//Kibana自动创建了[@version、@timestamp]
+				Class<?> fieldType = clazz.getDeclaredField(entry.getKey()).getType();
+				Method method = clazz.getDeclaredMethod(
+						"set" + entry.getKey().substring(0, 1).toUpperCase() + entry.getKey().substring(1), fieldType);
+				if(showHigh){
+					Map<String, HighlightField> result = hit.getHighlightFields();
+					HighlightField highField = result.get(entry.getKey());
+					if (highField !=null) {
+						String html = "";
+						// 取得定义的高亮标签
+						Text[] titleTexts = highField.fragments();
+						// 为title串值增加自定义的高亮标签
+						for (Text text : titleTexts) {
+							html += text;
+						}
+						method.invoke(newInstance, html);
+					}else {
+						if(fieldType.getSimpleName().equalsIgnoreCase("Date")) {
+							method.invoke(newInstance, ElasticSearchService.SDF_UTC.parse(entry.getValue()+""));
+						}else {
+							method.invoke(newInstance, entry.getValue());
+						}
+					}
+				}else{
+					if (fieldType.getSimpleName().equalsIgnoreCase("Date")) {
+						method.invoke(newInstance, ElasticSearchService.SDF_UTC.parse(entry.getValue() + ""));
+					} else {
+						method.invoke(newInstance, entry.getValue());
+					}
+				}
+			}
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		}
+		return newInstance;
 	}
 
 }

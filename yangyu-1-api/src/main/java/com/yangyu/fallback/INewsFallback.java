@@ -5,11 +5,10 @@ import com.yangyu.common.json.JsonResult;
 import com.yangyu.common.page.Page;
 import com.yangyu.common.page.PageInfo;
 import com.yangyu.common.util.LogUtil;
-import com.yangyu.common.util.U;
-import com.yangyu.news.api.dto.NewsListQueryDto;
+import com.yangyu.news.api.dto.NewsManageDto;
 import com.yangyu.news.api.dto.NewsSaveDto;
-import com.yangyu.news.api.vo.NewsVo;
 import feign.hystrix.FallbackFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -36,13 +35,13 @@ public class INewsFallback implements FallbackFactory<NewsApi> {
             }
 
             @Override
-            public JsonResult<PageInfo> manageList(NewsListQueryDto newsListQueryDto, Page page) {
+            public JsonResult<PageInfo> manageList(NewsManageDto newsManageDto, Integer page, Integer limit) {
                 LogUtil.ROOT_LOG.error("服务器异常,显示列表失败",throwable);
                 return JsonResult.fail("暂时没有你想要的内容");
             }
 
             @Override
-            public JsonResult manageDel(List<Long> id) {
+            public JsonResult manageDel(List<Long> ids) {
                 LogUtil.ROOT_LOG.error("服务器异常,删除资讯失败",throwable);
                 return JsonResult.fail("删除资讯失败,请稍后再试");
             }

@@ -3,6 +3,7 @@ package com.yangyu.news.model;
 import com.yangyu.common.Const;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,6 +16,7 @@ import java.util.Date;
 @Table(name = "yangyu_news")
 @Getter
 @Setter
+@Accessors(chain = true)
 public class News {
 
     @Id

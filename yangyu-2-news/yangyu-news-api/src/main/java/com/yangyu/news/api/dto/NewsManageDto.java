@@ -12,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class NewsListQueryDto {
+public class NewsManageDto {
 
     @ApiParam("标题")
     private String title;
@@ -21,6 +21,6 @@ public class NewsListQueryDto {
     private String author;
 
     @ApiParam("发表时间")
-    private String publishDate;
+    private String publish_date;
 
 }
