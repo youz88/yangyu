@@ -56,7 +56,7 @@
     ```
 - kafka(0.9.0.1)
     ```
-    //KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.99.100:9092
+    //不添加这个会连接不到kafka导致[passed since batch creation plus linger time]错误(KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.99.100:9092)
     docker run --name kafka -d -e HOST_IP=localhost -e KAFKA_ADVERTISED_PORT=9092 -e KAFKA_BROKER_ID=1 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.99.100:9092 -e ZK=zk -p 9092:9092 --link zookeeper:zk -t bb084b80bef3
     docker run -d --name kafka -p 9092:9092 --link zookeeper -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 -e KAFKA_ADVERTISED_HOST_NAME=localhost -e KAFKA_ADVERTISED_PORT=9092 XXX
     1.创建一个 topic 名称为 test
