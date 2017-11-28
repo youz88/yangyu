@@ -3,14 +3,30 @@ spring:
     stream:
       kafka:
         binder:
-          brokers: 192.168.99.100:9092
-          zkNodes: 192.168.99.100:2181
-          replicationFactor: 3
+          brokers: localhost:9092
+          zk-nodes: localhost:2181
+          auto-add-partitions: true
+          auto-create-topics: true
+          min-partition-count: 1
       bindings:
-        topic_out:
-          destination: test
-          partitionCount: 2
+        output:
+          destination: event-demo
+          content-type: text/plain
+          producer:
+            partitionCount: 1
   application:
     name: yangyu-study-stream-provider
+#spring:
+#  cloud:
+#    stream:
+#      bindings:
+#        publish: # @See personal.leo.tutorial.stream.producer0.channel.LogPublishChannel.PUBLISH
+#          destination: event-demo
+#      kafka:
+#        binder: #指定kafka broker和zookeeper nodes
+#          brokers:
+#            - 192.168.99.100:9092
+#          zkNodes: 192.168.99.100:2181
+
 server:
   port: 8081

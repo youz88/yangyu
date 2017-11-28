@@ -1,4 +1,4 @@
-package com.yangyu.study.stream.consumer;
+package com.yangyu.study;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
