@@ -12,6 +12,23 @@ feign:
   hystrix:
     enabled: false
 
+spring:
+  cloud:
+    stream:
+      kafka:
+        binder:
+          brokers: localhost:9092
+          zk-nodes: localhost:2181
+          auto-add-partitions: true
+          auto-create-topics: true
+          min-partition-count: 1
+      bindings:
+        output:
+          destination: yangyu-email
+          content-type: text/plain
+          producer:
+            partitionCount: 1
+
 security:
   basic:
     enabled: false
