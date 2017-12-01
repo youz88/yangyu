@@ -19,6 +19,11 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.yangyu</groupId>
+			<artifactId>yangyu-common</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.yangyu</groupId>
 			<artifactId>yangyu-global</artifactId>
 			<scope>provided</scope>
 		</dependency>

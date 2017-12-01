@@ -2,23 +2,22 @@
 
 
 ####docker ELK启动
-
-- 运行ElasticSearch需设置docker 
+- **运行ElasticSearch需设置docker** 
     - 1.vi /etc/sysctl.conf
     - 2.vm.max_map_count=655360
     - 3.sysctl -p
-- docker容器中安装vi命令
+- **docker容器中安装vi命令**
     - apt-get update
     - apt-get install vim
-- elasticsearch(5.4.0): 
+- **elasticsearch(5.4.0)** 
     ``` 
     docker run --name=elasticsearch -p 9200:9200 -p 9300:9300 -v /usr/elk-config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v /usr/elk-config/jvm.options:/etc/elasticsearch/jvm.options -d XXX
     ```
-- kibana(5.4.0) 
+- **kibana(5.4.0)** 
     ```
     docker run --name kibana -e ELASTICSEARCH_URL=http://192.168.99.100:9200 -p 5601:5601 -d XXX
     ```
-- logstash(需要含有mysql-connector-java) 
+- **logstash(需要含有mysql-connector-java)** 
     ```
     docker run -it --rm XXX -e 'input {
        jdbc {
@@ -50,11 +49,11 @@
          index => "yangyu-news-%{+YYYY.MM.dd}"
        }        
      }
-- zookeeper(3.4.9)
+- **zookeeper(3.4.9)**
     ```
     docker run -d --name zookeeper -p 2181:2181 XXX
     ```
-- kafka(0.9.0.1)
+- **kafka(0.9.0.1)**
     ```
     //不添加这个会连接不到kafka导致[passed since batch creation plus linger time]错误(KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.99.100:9092)
     docker run --name kafka -d -e HOST_IP=localhost -e KAFKA_ADVERTISED_PORT=9092 -e KAFKA_BROKER_ID=1 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.99.100:9092 -e ZK=zk -p 9092:9092 --link zookeeper:zk -t bb084b80bef3

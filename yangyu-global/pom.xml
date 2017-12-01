@@ -20,6 +20,7 @@
 		<dependency>
 			<groupId>com.yangyu</groupId>
 			<artifactId>yangyu-common</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
