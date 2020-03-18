@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiParam;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.http.HttpEntity;
 
 /**
  * Created by youz on 2017/11/20.
@@ -31,7 +30,7 @@ public class RegisterDto {
     @ApiParam("验证码")
     private String captcha;
 
-    public User currentData(){
+    public User userData(){
         return JsonUtil.convert(this,User.class);
     }
 

@@ -28,8 +28,7 @@
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
-			<scope>provided</scope>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>joda-time</groupId>

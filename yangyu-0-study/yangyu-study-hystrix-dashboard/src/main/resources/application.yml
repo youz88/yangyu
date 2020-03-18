@@ -1,5 +1,0 @@
-server:
-  port: 8093
-spring:
-  application:
-    name: yangyu-study-hystrix-dashboard

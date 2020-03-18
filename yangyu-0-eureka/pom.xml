@@ -19,7 +19,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka-server</artifactId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
 
 		<dependency>
@@ -30,7 +30,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>yangyu-0-eureka-8761</finalName>
+		<finalName>yangyu-eureka-8761</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

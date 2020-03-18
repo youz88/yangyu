@@ -32,7 +32,7 @@ public class UserController implements UserServer {
 
     @Override
     public JsonResult register(@RequestBody RegisterDto registerDto) {
-        userService.register(registerDto.currentData());
+        userService.register(registerDto.userData());
         return JsonResult.success("注册成功");
     }
 
