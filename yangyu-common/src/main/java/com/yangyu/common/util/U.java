@@ -3,7 +3,6 @@ package com.yangyu.common.util;
 import com.yangyu.common.date.DateUtil;
 import com.yangyu.common.exception.ServiceException;
 import com.yangyu.common.exception.ServiceMustHandleException;
-import org.apache.commons.lang.ArrayUtils;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;

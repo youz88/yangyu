@@ -18,10 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * Created by youz on 2017/11/10.
- */
-
 @RestController
 @Api(value = "NewsApi", description = "资讯API", tags = {"资讯服务"})
 public class NewsController implements NewsServer{

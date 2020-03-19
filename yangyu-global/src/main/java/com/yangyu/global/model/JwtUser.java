@@ -9,9 +9,8 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 /**
- * Created by youz on 2017/11/7.
+ * JWT参数信息
  */
-
 @Getter
 @Setter
 @Accessors(chain = true)

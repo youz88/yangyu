@@ -2,9 +2,6 @@ package com.yangyu.user.enums;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
-/**
- * Created by youz on 2017/11/8.
- */
 public enum PermissionType {
 
     /** 目录 */

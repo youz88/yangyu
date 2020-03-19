@@ -16,9 +16,6 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by youz on 2017/11/9.
- */
 @Service
 public class PermissionServiceImpl implements PermissionService{
 

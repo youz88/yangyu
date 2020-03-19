@@ -2,9 +2,6 @@ package com.yangyu.web.security;
 
 import org.springframework.security.core.GrantedAuthority;
 
-/**
- * Created by youz on 2017/11/2.
- */
 public class GrantedAuthorityImpl implements GrantedAuthority{
 
     private String authority;

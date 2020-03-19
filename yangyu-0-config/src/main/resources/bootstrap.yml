@@ -1,12 +1,7 @@
 spring:
   application:
     name: yangyu-0-config
-eureka:
-  instance:
-    instance-id: ${spring.cloud.client.ipAddress}:${server.port}
-    lease-renewal-interval-in-seconds: 2 #契约更新间隔
-    lease-expiration-duration-in-seconds: 4 #契约过期时间
-    preferIpAddress: true
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.67.128:8848

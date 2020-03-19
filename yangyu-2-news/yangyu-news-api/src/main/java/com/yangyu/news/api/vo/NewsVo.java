@@ -10,7 +10,7 @@ import lombok.Setter;
 import java.io.Serializable;
 
 /**
- * Created by youz on 2017/11/13.
+ * 资讯返回实体
  */
 @Getter
 @Setter

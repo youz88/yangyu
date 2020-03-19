@@ -8,9 +8,6 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by youz on 2017/11/17.
- */
 @Component
 public class IPermissionFallback implements FallbackFactory<PermissionApi>{
     @Override

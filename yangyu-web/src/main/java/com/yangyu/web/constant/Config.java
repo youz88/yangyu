@@ -6,9 +6,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by youz on 2017/11/22.
- */
 @Component
 @RefreshScope
 @Getter

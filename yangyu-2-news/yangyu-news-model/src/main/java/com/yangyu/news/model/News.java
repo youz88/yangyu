@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Created by youz on 2017/11/9.
  * 新闻资讯
  */
 @Entity

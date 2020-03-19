@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * Created by youz on 2017/11/24.
  * 后台资讯列表查询
  */
 @Getter

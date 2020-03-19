@@ -21,9 +21,6 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
-/**
- * Created by youz on 2017/11/2.
- */
 public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
     private AuthenticationManager authenticationManager;

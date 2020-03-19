@@ -7,9 +7,6 @@ import lombok.Setter;
 
 import java.util.List;
 
-/**
- * Created by youz on 2017/11/10.
- */
 @Getter
 @Setter
 @NoArgsConstructor

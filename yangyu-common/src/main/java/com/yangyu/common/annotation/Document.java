@@ -2,9 +2,6 @@ package com.yangyu.common.annotation;
 
 import java.lang.annotation.*;
 
-/**
- * Created by youz on 2017/11/16.
- */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented

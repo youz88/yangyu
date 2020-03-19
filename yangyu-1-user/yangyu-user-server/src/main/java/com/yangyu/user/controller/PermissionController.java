@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by youz on 2017/11/9.
- */
 @RestController
 @Api(value = "PermissionApi", description = "权限API", tags = {"权限服务"})
 public class PermissionController implements PermissionServer{

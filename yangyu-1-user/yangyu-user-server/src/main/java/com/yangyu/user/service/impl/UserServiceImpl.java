@@ -10,9 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by youz on 2017/10/27.
- */
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -21,9 +20,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User selectById(Long id) {
-        User user = userRepository.findOne(id);
-        U.assertNil(user,"该用户不存在");
-        return user;
+        Optional<User> user = userRepository.findById(id);
+        U.assertException(!user.isPresent(),"该用户不存在");
+        return user.get();
     }
 
     @Cacheable(value = "user", key = "#userName")

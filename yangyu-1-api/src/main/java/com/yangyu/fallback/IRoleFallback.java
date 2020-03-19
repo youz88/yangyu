@@ -7,9 +7,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * Created by youz on 2017/11/10.
- */
 @Component
 public class IRoleFallback implements FallbackFactory<RoleApi> {
     @Override

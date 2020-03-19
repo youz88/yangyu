@@ -8,10 +8,7 @@ spring:
         server:
           native:
             search-locations: classpath:/config #配置文件根目录
-security: #加密配置
-  user:
-    name: config
-    password: admin
-management:
   security:
-    enabled: false
+    user:
+      name: admin
+      password: admin

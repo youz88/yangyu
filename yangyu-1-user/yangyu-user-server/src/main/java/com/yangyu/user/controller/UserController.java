@@ -10,9 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Created by youz on 2017/10/27.
- */
 @RestController
 @Api(value = "UserApi", description = "用户API", tags = {"用户服务"})
 public class UserController implements UserServer {

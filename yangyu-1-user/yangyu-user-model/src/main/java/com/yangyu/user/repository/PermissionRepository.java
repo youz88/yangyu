@@ -9,9 +9,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by youz on 2017/11/9.
- */
 @Repository
 public interface PermissionRepository extends JpaRepository<Permission,Long>{
 

@@ -16,9 +16,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
 
-/**
- * Created by youz on 2017/11/29.
- */
 @EnableBinding(Sink.class)
 public class EmailService {
 

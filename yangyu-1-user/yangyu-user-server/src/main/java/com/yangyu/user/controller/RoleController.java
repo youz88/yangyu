@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-/**
- * Created by youz on 2017/11/10.
- */
 @RestController
 @Api(value = "RoleApi", description = "角色API", tags = {"角色服务"})
 public class RoleController implements RoleServer{

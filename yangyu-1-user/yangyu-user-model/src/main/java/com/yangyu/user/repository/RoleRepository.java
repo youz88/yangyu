@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by youz on 2017/11/8.
- */
 @Repository
 public interface RoleRepository extends JpaRepository<Role,Long>{
 

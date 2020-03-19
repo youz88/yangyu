@@ -7,9 +7,6 @@ import com.yangyu.user.api.vo.UserInfoVo;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
 
-/**
- * Created by youz on 2017/11/10.
- */
 @Component
 public class IUserFallback implements FallbackFactory<UserApi> {
 

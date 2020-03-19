@@ -9,9 +9,6 @@ import org.springframework.util.DigestUtils;
 
 import java.util.Base64;
 
-/**
- * Created by youz on 2017/10/27.
- */
 @Getter
 @Setter
 public class LoginDto {

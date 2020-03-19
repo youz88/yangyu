@@ -1,6 +1,5 @@
 package com.yangyu.global.service;
 
-import com.yangyu.common.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.context.annotation.Configuration;
@@ -9,20 +8,18 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.query.SortQueryBuilder;
 import org.springframework.data.redis.serializer.RedisSerializer;
-import redis.clients.jedis.Jedis;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
-import org.springframework.dao.DataAccessException;
 
 @Configuration
-@ConditionalOnClass({ Jedis.class, StringRedisTemplate.class })
+@ConditionalOnClass({StringRedisTemplate.class })
 public class CacheService {
 
-    /** @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration.RedisConfiguration */
+    /** @see org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration */
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
 

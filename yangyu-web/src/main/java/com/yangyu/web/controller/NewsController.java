@@ -7,9 +7,6 @@ import com.yangyu.news.api.dto.NewsManageDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * Created by youz on 2017/11/17.
- */
 @RestController
 @RequestMapping("/news")
 public class NewsController {

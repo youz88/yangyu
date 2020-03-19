@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by youz on 2017/11/10.
- */
 @RestController
 @Api("权限API")
 @RequestMapping(value = "/yangyu-permission")

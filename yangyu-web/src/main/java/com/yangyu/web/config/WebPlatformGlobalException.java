@@ -24,9 +24,9 @@ import static com.yangyu.common.json.JsonResult.notLogin;
 /**
  * 处理全局异常的控制类
  *
- * @see org.springframework.boot.autoconfigure.web.ErrorController
+ * @see org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController
  * @see org.springframework.boot.autoconfigure.web.ErrorProperties
- * @see org.springframework.boot.autoconfigure.web.ErrorMvcAutoConfiguration
+ * @see org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
  */
 @ControllerAdvice
 public class WebPlatformGlobalException {

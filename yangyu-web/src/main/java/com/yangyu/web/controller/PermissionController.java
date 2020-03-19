@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Created by youz on 2017/11/17.
- */
 @RestController
 @RequestMapping("/permission")
 public class PermissionController {

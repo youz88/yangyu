@@ -5,14 +5,15 @@
 　　基于SpringCloud+JPA分布式敏捷开发系统架构，主要目的是能够让初级的研发人员快速的开发出复杂的业务功能，让开发者注重专注业务，其余有平台来封装技术细节，降低技术难度，从而节省人力成本，缩短项目周期，提高软件安全质量
 
 
-####docker ELK启动
+####docker 相关
+- **Nacos(1.2.0)** [配置相关参数](https://nacos.io/zh-cn/docs/quick-start-docker.html)
+    ``` 
+    docker run -d --name nacos-mysql-standalone --net=host -v /home/nacos/logs:/home/nacos/logs -e MODE=standalone -e MYSQL_DATABASE_NUM=1 -e SPRING_DATASOURCE_PLATFORM=mysql -e MYSQL_MASTER_SERVICE_HOST=192.168.99.100 -e MYSQL_MASTER_SERVICE_PORT=3306 -e MYSQL_MASTER_SERVICE_USER=root -e MYSQL_MASTER_SERVICE_PASSWORD=root -e MYSQL_MASTER_SERVICE_DB_NAME=nacos -p 8848:8848 XXX
+    ```
 - **运行ElasticSearch需设置docker** 
     - 1.vi /etc/sysctl.conf
     - 2.vm.max_map_count=655360
     - 3.sysctl -p
-- **docker容器中安装vi命令**
-    - apt-get update
-    - apt-get install vim
 - **elasticsearch(5.4.0)** 
     ``` 
     docker run --name=elasticsearch -p 9200:9200 -p 9300:9300 -v /usr/elk-config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -v /usr/elk-config/jvm.options:/etc/elasticsearch/jvm.options -d XXX

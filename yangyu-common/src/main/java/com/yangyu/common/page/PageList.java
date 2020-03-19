@@ -3,9 +3,6 @@ package com.yangyu.common.page;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**
- * Created by youz on 2017/11/1.
- */
 public class PageList<E> extends ArrayList<E> {
     private int total;
 

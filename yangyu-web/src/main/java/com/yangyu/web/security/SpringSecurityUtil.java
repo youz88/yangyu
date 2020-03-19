@@ -16,9 +16,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Created by youz on 2017/11/3.
- */
 public class SpringSecurityUtil {
 
     public static Claims getClaims() {

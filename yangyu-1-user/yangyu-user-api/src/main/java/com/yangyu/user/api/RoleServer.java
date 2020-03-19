@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by youz on 2017/11/10.
- */
 @RestController
 @Api("角色服务API")
 @RequestMapping(value = "/yangyu-role")

@@ -13,9 +13,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-/**
- * Created by youz on 2017/11/13.
- */
 @Component
 public class INewsFallback implements FallbackFactory<NewsApi> {
 

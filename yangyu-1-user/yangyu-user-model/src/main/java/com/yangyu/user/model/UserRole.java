@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 /**
- * Created by youz on 2017/11/8.
+ * 用户角色
  */
 @Entity
 @Table(name = "yangyu_user_role")

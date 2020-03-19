@@ -18,7 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Created by youz on 2017/11/9.
+ * 资讯相关定时任务
  */
 @Component
 public class NewsTask{

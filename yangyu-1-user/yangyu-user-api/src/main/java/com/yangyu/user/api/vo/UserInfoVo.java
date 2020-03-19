@@ -7,9 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-/**
- * Created by youz on 2017/11/6.
- */
 @Getter
 @Setter
 @NoArgsConstructor

@@ -7,12 +7,9 @@ import com.yangyu.global.model.JwtUser;
 import com.yangyu.web.constant.Config;
 import com.yangyu.web.security.SpringSecurityUtil;
 import io.jsonwebtoken.ExpiredJwtException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -21,9 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * Created by youz on 2017/11/2.
- */
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter{
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {

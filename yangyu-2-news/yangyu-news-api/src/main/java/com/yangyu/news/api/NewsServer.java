@@ -11,9 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/**
- * Created by youz on 2017/11/13.
- */
 @Api("资讯API")
 @RequestMapping(value = "/yangyu-news")
 public interface NewsServer {
