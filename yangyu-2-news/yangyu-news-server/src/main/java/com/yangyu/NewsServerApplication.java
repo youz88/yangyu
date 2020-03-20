@@ -7,15 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-
-import java.util.concurrent.ThreadPoolExecutor;
 
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableCaching
-public class YangyuNewsServerApplication {
+public class NewsServerApplication {
 
 //	@Bean
 //	public ThreadPoolTaskExecutor getThreadPoolTaskExecutor(){
@@ -33,7 +29,7 @@ public class YangyuNewsServerApplication {
 //	}
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(YangyuNewsServerApplication.class, args);
+		ApplicationContext ctx = SpringApplication.run(NewsServerApplication.class, args);
 		if (LogUtil.ROOT_LOG.isDebugEnabled()) {
 			String[] activeProfiles = ctx.getEnvironment().getActiveProfiles();
 			if (A.isNotEmpty(activeProfiles)) {

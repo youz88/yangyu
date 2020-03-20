@@ -15,10 +15,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @EnableCircuitBreaker
 @EnableFeignClients(basePackages = {"com.yangyu.api"})
-public class YangyuTaskApplication {
+public class TaskApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext ctx = SpringApplication.run(YangyuTaskApplication.class, args);
+		ApplicationContext ctx = SpringApplication.run(TaskApplication.class, args);
 		if (LogUtil.ROOT_LOG.isDebugEnabled()) {
 			String[] activeProfiles = ctx.getEnvironment().getActiveProfiles();
 			if (A.isNotEmpty(activeProfiles)) {

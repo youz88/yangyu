@@ -14,3 +14,6 @@ spring:
       username: config
       password: admin
       profile: default  #指定加载配置文件profile
+    nacos:
+      discovery:
+        server-addr: 192.168.67.128:8848
