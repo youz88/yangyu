@@ -6,9 +6,13 @@
 
 
 ####docker 相关
-- **Nacos(1.2.0)** [配置相关参数](https://nacos.io/zh-cn/docs/quick-start-docker.html)
+- **Nacos(2.0)** [配置相关参数](https://nacos.io/zh-cn/docs/quick-start-docker.html)
     ``` 
-    docker run -d --name nacos-mysql-standalone --net=host -v /home/nacos/logs:/home/nacos/logs -e MODE=standalone -e MYSQL_DATABASE_NUM=1 -e SPRING_DATASOURCE_PLATFORM=mysql -e MYSQL_MASTER_SERVICE_HOST=192.168.99.100 -e MYSQL_MASTER_SERVICE_PORT=3306 -e MYSQL_MASTER_SERVICE_USER=root -e MYSQL_MASTER_SERVICE_PASSWORD=root -e MYSQL_MASTER_SERVICE_DB_NAME=nacos -p 8848:8848 XXX
+    docker run -p 8848:8848 -e MYSQL_SERVICE_HOST=192.168.84.128 -e MYSQL_SERVICE_PORT=3306 -e MYSQL_SERVICE_USER=root -e MYSQL_SERVICE_PASSWORD=root -e MYSQL_SERVICE_DB_NAME=nacos --name nacos -d XXX
+    ```
+- **Sentinel Dashboard** [下载](http://edas-public.oss-cn-hangzhou.aliyuncs.com/install_package/demo/sentinel-dashboard.jar) 
+    ```
+    通过运行java -jar sentinel-dashboard.jar命令来启动仪表板。 Sentinel仪表板的默认端口为8080
     ```
 - **运行ElasticSearch需设置docker** 
     - 1.vi /etc/sysctl.conf

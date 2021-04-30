@@ -5,7 +5,6 @@ import com.yangyu.common.json.JsonResult;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
 import java.util.List;
 
 @Component
