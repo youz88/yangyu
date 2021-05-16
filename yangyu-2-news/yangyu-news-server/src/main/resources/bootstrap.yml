@@ -11,7 +11,7 @@ spring:
         enabled: true
         service-id: yangyu-0-config
       fail-fast: true # 如果连接配置中心出错,则中断程序
-      username: config
+      username: admin
       password: admin
       profile: default  #指定加载配置文件profile
     nacos:

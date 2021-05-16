@@ -5,10 +5,10 @@
 　　基于SpringCloud+JPA分布式敏捷开发系统架构，主要目的是能够让初级的研发人员快速的开发出复杂的业务功能，让开发者注重专注业务，其余有平台来封装技术细节，降低技术难度，从而节省人力成本，缩短项目周期，提高软件安全质量
 
 
-####docker 相关
+#### docker 相关
 - **Nacos(2.0)** [配置相关参数](https://nacos.io/zh-cn/docs/quick-start-docker.html)
     ``` 
-    docker run -p 8848:8848 -e MYSQL_SERVICE_HOST=192.168.84.128 -e MYSQL_SERVICE_PORT=3306 -e MYSQL_SERVICE_USER=root -e MYSQL_SERVICE_PASSWORD=root -e MYSQL_SERVICE_DB_NAME=nacos --name nacos -d XXX
+    docker run -p 8848:8848 -e MYSQL_SERVICE_HOST=[ip] -e MYSQL_SERVICE_PORT=3306 -e MYSQL_SERVICE_USER=root -e MYSQL_SERVICE_PASSWORD=root -e MYSQL_SERVICE_DB_NAME=nacos --name nacos -d [image]
     ```
 - **Sentinel Dashboard** [下载](http://edas-public.oss-cn-hangzhou.aliyuncs.com/install_package/demo/sentinel-dashboard.jar) 
     ```
@@ -58,22 +58,20 @@
          index => "yangyu-news-%{+YYYY.MM.dd}"
        }        
      }
-- **zookeeper(3.4.9)**
+- **zookeeper(3.4.8)**
     ```
-    docker run -d --name zookeeper -p 2181:2181 XXX
+    docker run -d --name zookeeper -p 2181:2181 [image]
     ```
-- **kafka(0.9.0.1)**
+- **kafka(2.13-2.7.0)**
     ```
-    //不添加这个会连接不到kafka导致[passed since batch creation plus linger time]错误(KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.99.100:9092)
-    docker run --name kafka -d -e HOST_IP=localhost -e KAFKA_ADVERTISED_PORT=9092 -e KAFKA_BROKER_ID=1 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.99.100:9092 -e ZK=zk -p 9092:9092 --link zookeeper:zk -t bb084b80bef3
-    docker run -d --name kafka -p 9092:9092 --link zookeeper -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 -e KAFKA_ADVERTISED_HOST_NAME=localhost -e KAFKA_ADVERTISED_PORT=9092 XXX
+    docker run -d --name kafka -p 9092:9092 -e KAFKA_BROKER_ID=0 -e KAFKA_ZOOKEEPER_CONNECT=192.168.84.128:2181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.84.128:9092 -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 [image]
+    
     1.创建一个 topic 名称为 test
-        bin/kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 1 --topic test
+        bin/kafka-topics.sh --create --zookeeper [ip]:2181 --replication-factor 1 --partitions 1 --topic yangyu-email
     2.查看当前的 topic 列表
-        bin/kafka-topics.sh --list --zookeeper zookeeper:2181
+        bin/kafka-topics.sh --list --zookeeper [ip]:2181
     3.运行一个消息生产者，指定 topic 为刚刚创建的 test 
-        bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+        bin/kafka-console-producer.sh --broker-list localhost:9092 --topic yangyu-email
     4.运行一个消息消费者，同样指定 topic 为 test
-        bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --zookeeper:2181 --topic test --from-beginning
-
+        bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic yangyu-email
     ```
